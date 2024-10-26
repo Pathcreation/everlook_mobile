@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826545005637",
+    "project_id": "everlook-mobile",
+    "storage_bucket": "everlook-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826545005637:android:2ab832aad957f1f1b96f2c",
+        "android_client_info": {
+          "package_name": "ae.everlook.everlook_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8rblREt-5PbPdheNqSh3mHM27tjd8yAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
