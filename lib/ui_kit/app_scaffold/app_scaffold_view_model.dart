@@ -5,26 +5,7 @@ class AppScaffoldViewModel extends ChangeNotifier {
   int calculateSelectedIndex(
     BuildContext context,
   ) {
-    // final GoRouter route = GoRouter.of(context);
-    // final RouteMatch lastMatch = route.routerDelegate.currentConfiguration.last;
-    // final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
-    //     ? lastMatch.matches
-    //     : route.routerDelegate.currentConfiguration;
-    // final String location = matchList.uri.toString().replaceAll('/', '');
     int index = 0;
-    // if (location.startsWith(Pages.createChat)) {
-    //   index = 0;
-    // }
-    // if (location.startsWith(Pages.chats) ||
-    //     location.startsWith(Pages.addedChat)) {
-    //   index = 1;
-    // }
-    // if (location.startsWith(Pages.individualChats)) {
-    //   index = 2;
-    // }
-    // if (location.startsWith(Pages.profile) || location.startsWith(Pages.auth)) {
-    //   index = 3;
-    // }
     return index;
   }
 

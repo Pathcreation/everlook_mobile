@@ -21,9 +21,6 @@ class AppFlow extends StatelessWidget {
     return Nested(
       children: [
         DiScope<IAppScope>(factory: (_) => appScope),
-        // Provider<AppRouter>(
-        //   create: (_) => AppRouter(),
-        // ),
         ChangeNotifierProvider<AppScaffoldViewModel>(
           create: (_) => AppScaffoldViewModel(),
         ),
