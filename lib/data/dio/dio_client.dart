@@ -22,8 +22,7 @@ class DioClient {
       ..contentType = 'application/json'
       ..headers = {
         "Content-Type": "application/json",
-        if (token != null && token.access.isNotEmpty)
-          "Authorization": 'Bearer ${token.access}',
+        if (token?.token != null && token?.token != '') "Authorization": 'Token ${token?.token}',
       }
       ..sendTimeout = timeout;
 

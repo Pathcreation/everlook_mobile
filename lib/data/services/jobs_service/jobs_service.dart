@@ -12,13 +12,14 @@ part 'jobs_service.g.dart';
 abstract class JobsService {
   factory JobsService(Dio dio, {String baseUrl}) = _JobsService;
 
-  @GET('${Endpoints.jobs}/{id}')
+  @GET('${Endpoints.jobs}/{jobId}')
   Future<AuthTokenPair?> getJob(
-    @Path('id') String id,
+    @Path('job_id') String jobId,
   );
 
-  @PUT('${Endpoints.jobs}/{id}')
+  @PUT('${Endpoints.jobs}/{jobId}')
   Future<JobModel?> editJob(
+    @Path('job_id') String jobId,
     @Body() JobModel job,
   );
 
@@ -27,14 +28,15 @@ abstract class JobsService {
     @Body() JobModel job,
   );
 
-  @DELETE('${Endpoints.jobs}/{id}')
+  @DELETE('${Endpoints.jobs}/{jobId}')
   Future<bool> deleteJob(
-    @Path('id') String id,
+    @Path('job_id') String jobId,
   );
 
   @GET(Endpoints.jobs)
   Future<List<JobModel>?> getJobs({
     @Query('user') required int userId,
+    @Query('contractor') required int contractorId,
     @Query('active') required bool active,
     @Query('archived') required bool archived,
   });
@@ -45,7 +47,7 @@ abstract class JobsService {
   );
 
   @GET('${Endpoints.jobs}/{id}/images')
-  Future<List<ReviewModel>> jobImage(
+  Future<List<ImageModel>> jobImage(
     @Path('id') String id,
   );
 
@@ -53,11 +55,18 @@ abstract class JobsService {
   @MultiPart()
   Future<ImageModel?> imagesUploadJob(
     @Part() String job, {
-    @Part(contentType: 'application/json') File image,
+    @Part() required File image,
   });
 
   @POST('${Endpoints.jobs}/images/{id}/delete/s/create}')
-  Future<JobModel?> deleteImagesJob(
+  Future<bool?> deleteImagesJob(
     @Path() String id,
+  );
+
+  @GET('${Endpoints.jobs}/location')
+  Future<List<JobModel>> getJobByLocation(
+    @Query('distance') String distance,
+    @Query('latitude') String latitude,
+    @Query('longitude') String longitude,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:everlook_mobile/navigation/app_router.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
 import 'text_field/app_text_field.dart';
@@ -15,8 +16,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.isSearch = false,
       this.centerTitle = false,
       this.enableFocus = false,
-      this.fontSize = 24,
-      this.backgroundColor = AppColors.background,
+      this.fontSize = 22,
+      this.backgroundColor,
       this.secondTitle,
       this.titleSpacing = 16,
       this.textController})
@@ -33,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isSearch;
   final bool enableFocus;
   final bool centerTitle;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Widget? secondTitle;
   final double titleSpacing;
   final TextEditingController? textController;
@@ -53,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
     return AppBar(
       titleSpacing: titleSpacing,
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? theme.colorScheme.onSecondary,
       leadingWidth: showBackButton ? 40 : 0,
       leading: showBackButton
           ? IconButton(
@@ -61,17 +62,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 if (onBack != null) {
                   onBack!();
                 } else {
-                  Navigator.pop(context);
+                  context.router.popAndPush(const MainRoute());
                 }
               },
-              icon: Icon(Icons.keyboard_arrow_left),
+              icon: SvgPicture.asset(
+                Assets.icons.arrowBack,
+                height: 16,
+              ),
             )
           : const SizedBox(),
       centerTitle: centerTitle,
       title: isSearch
           ? AppTextField(
               hintText: hintText ?? 'Введите имя пользователя',
-              height: 25,
               minHeight: 19,
               contentPadding: const EdgeInsets.only(bottom: 0),
               isDense: true,
@@ -80,9 +83,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onChange: onChange,
               hintStyle: theme.textTheme.bodyMedium!.copyWith(
                 fontSize: 16,
-                color: AppColors.additional2,
+                color: theme.colorScheme.secondary,
               ),
-              showBorder: false,
             )
           : Row(
               mainAxisSize: MainAxisSize.min,
@@ -91,9 +93,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: theme.textTheme.titleLarge!.copyWith(
+                    style: theme.textTheme.headlineLarge!.copyWith(
                       fontSize: fontSize,
-                      color: AppColors.white,
                       fontWeight: FontWeight.w500,
                     ),
                     softWrap: true,
@@ -105,9 +106,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (isSearch)
           IconButton(
             onPressed: onCloseSearch,
-            icon: const Icon(
+            icon: Icon(
               Icons.close,
-              color: AppColors.additional1,
+              color: theme.colorScheme.secondary,
             ),
           ),
         if (!isSearch && actions != null) ...actions!,

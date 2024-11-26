@@ -13,10 +13,14 @@ class ReviewModel with _$ReviewModel {
     int? star,
     String? text,
     String? answer,
-    @JsonKey(name: 'positive_tags') List<int>? positiveTags,
-    @JsonKey(name: 'negative_tags') List<int>? negativeTags,
-    @JsonKey(name: 'work_price') double? workPrice,
-    @JsonKey(name: 'materials_price') double? materialsPprice,
+    @JsonKey(name: "positive_tags")
+    List<int>? positiveTags,
+    @JsonKey(name: "negative_tags")
+    List<String>? negativeTags,
+    @JsonKey(name: "work_price")
+    String? workPrice,
+    @JsonKey(name: "materials_price")
+    String? materialsPrice,
     List<String>? images,
   }) = _ReviewModel;
 

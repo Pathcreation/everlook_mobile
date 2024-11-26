@@ -361,12 +361,9 @@ class _DatePickerModeToggleButtonState
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme.copyWith(
-          onPrimary: AppColors.background,
-          onSurface: AppColors.white,
-        );
+    final theme = Theme.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Color controlColor = colorScheme.onSurface;
+    final Color controlColor = theme.colorScheme.onSurface;
 
     return Container(
       padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
@@ -957,6 +954,7 @@ class _DayPickerState extends State<_DayPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);
     final DatePickerThemeData datePickerTheme = DatePickerTheme.of(context);
@@ -1038,20 +1036,13 @@ class _DayPickerState extends State<_DayPicker> {
             ? Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: gradientButton,
                 ),
                 child: Container(
                   margin: const EdgeInsets.all(1),
                   decoration: decoration,
                   child: Center(
-                    child: ShaderMask(
-                      blendMode: BlendMode.srcIn,
-                      shaderCallback: (bounds) => gradientButton.createShader(
-                        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                      ),
-                      child: Text(localizations.formatDecimal(day),
-                          style: dayStyle?.apply(color: dayForegroundColor)),
-                    ),
+                    child: Text(localizations.formatDecimal(day),
+                        style: dayStyle?.apply(color: dayForegroundColor)),
                   ),
                 ),
               )
@@ -1069,13 +1060,14 @@ class _DayPickerState extends State<_DayPicker> {
                   )
                 : Container(
                     decoration: BoxDecoration(
-                      gradient: gradientButton,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Text(
                         localizations.formatDecimal(day),
-                        style: dayStyle?.apply(color: AppColors.background),
+                        style: dayStyle?.apply(
+                          color: theme.colorScheme.primary,
+                        ),
                       ),
                     ),
                   );

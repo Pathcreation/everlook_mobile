@@ -2,7 +2,6 @@ import 'package:everlook_mobile/source/endpoints.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/source/keys.dart';
 import 'package:everlook_mobile/source/preferences.dart';
-import 'package:restart_app/restart_app.dart';
 
 class AppInterceptors {
   late Interceptors interceptors;
@@ -16,42 +15,20 @@ class AppInterceptors {
       InterceptorsWrapper(
         onRequest: (request, handler) async {
           final tokens = await storage.read();
-          if (tokens != null && tokens.access != '') {
-            request.headers['Authorization'] = 'Bearer ${tokens.access}';
+          if (tokens?.token != null && tokens?.token != '') {
+            request.headers['Authorization'] = 'Token ${tokens!.token}';
           }
           return handler.next(request);
         },
         onError: (e, handler) async {
           if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
-            if (!e.requestOptions.path.contains('refreshToken')) {
-              try {
-                await _refreshRequest(dio, storage).then((value) async {
-                  e.requestOptions.headers["Authorization"] =
-                      "Bearer ${value.access}";
-                  final opts = Options(
-                    method: e.requestOptions.method,
-                    headers: e.requestOptions.headers,
-                  );
-                  final cloneReq = await dio.request(e.requestOptions.path,
-                      options: opts,
-                      data: e.requestOptions.data,
-                      queryParameters: e.requestOptions.queryParameters);
-
-                  return handler.resolve(cloneReq);
-                });
-              } catch (e, st) {
-                debugPrint(e.toString());
-              }
-            } else {
-              await Preferences.clear().then((_) async {
-                await storage.delete();
-              });
-            }
-          }
-          if (e.response?.statusCode == 404 &&
-              e.requestOptions.path.contains('refreshToken')) {
+            await storage.delete();
+          } else if (e.response?.statusCode == 404 && e.requestOptions.path.contains('refreshToken')) {
             await storage.delete();
           }
+          // else {
+          //   throw e;
+          // }
         },
       ),
     );
@@ -73,18 +50,18 @@ class AppInterceptors {
         .then((value) async {
       await tokenStorage.write(
         AuthTokenPair(
-          access: (value.data as Map)[Keys.accessToken] as String,
+          token: (value.data as Map)[Keys.accessToken] as String,
           refresh: (value.data as Map)[Keys.refreshToken] as String,
         ),
       );
       return AuthTokenPair(
-        access: (value.data as Map)[Keys.accessToken] as String,
+        token: (value.data as Map)[Keys.accessToken] as String,
         refresh: (value.data as Map)[Keys.refreshToken] as String,
       );
     });
 
     return const AuthTokenPair(
-      access: '',
+      token: '',
       refresh: '',
     );
   }

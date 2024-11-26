@@ -6,15 +6,19 @@ part 'auth_token_pair.g.dart';
 @JsonSerializable()
 class AuthTokenPair {
   /// Access-token for accessing server resources for an authorized user.
-  final String access;
+  final String? token;
 
   /// Refresh-token for updating the access-token.
-  final String refresh;
+  final String? refresh;
+
+  /// Firebase-token.
+  final String? firebaseToken;
 
   /// Create an instance [AuthTokenPair].
   const AuthTokenPair({
-    required this.access,
-    required this.refresh,
+    this.token,
+    this.refresh,
+    this.firebaseToken,
   });
 
   /// Create an instance [AuthTokenPair] from json.

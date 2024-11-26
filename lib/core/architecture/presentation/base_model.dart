@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
-import 'package:everlook_mobile/common/utils/logger/i_log_writer.dart';
 import 'package:everlook_mobile/core/architecture/domain/entity/failure.dart';
 import 'package:everlook_mobile/core/architecture/domain/entity/request_operation.dart';
 import 'package:everlook_mobile/core/architecture/domain/entity/result.dart';
@@ -12,11 +11,8 @@ typedef RequestCall<T> = RequestOperation<T> Function();
 /// Base class for all [ElementaryModel]s in the application.
 /// {@endtemplate}
 abstract base class BaseModel extends ElementaryModel {
-  /// {@macro i_log_writer.class}
-  final ILogWriter logWriter;
-
   /// {@macro base_model.class}
-  BaseModel({required this.logWriter});
+  BaseModel();
 
   /// Call repository method. All repository calls must be made through this method.
   @protected
@@ -34,6 +30,6 @@ abstract base class BaseModel extends ElementaryModel {
   }
 
   void _logFailure(Failure failure) {
-    logWriter.failure(failure);
+    print(failure);
   }
 }

@@ -19,10 +19,10 @@ _$ReviewModelImpl _$$ReviewModelImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => (e as num).toInt())
           .toList(),
       negativeTags: (json['negative_tags'] as List<dynamic>?)
-          ?.map((e) => (e as num).toInt())
+          ?.map((e) => e as String)
           .toList(),
-      workPrice: (json['work_price'] as num?)?.toDouble(),
-      materialsPprice: (json['materials_price'] as num?)?.toDouble(),
+      workPrice: json['work_price'] as String?,
+      materialsPrice: json['materials_price'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
@@ -37,6 +37,6 @@ Map<String, dynamic> _$$ReviewModelImplToJson(_$ReviewModelImpl instance) =>
       'positive_tags': instance.positiveTags,
       'negative_tags': instance.negativeTags,
       'work_price': instance.workPrice,
-      'materials_price': instance.materialsPprice,
+      'materials_price': instance.materialsPrice,
       'images': instance.images,
     };

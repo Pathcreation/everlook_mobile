@@ -25,14 +25,14 @@ mixin _$ReviewModel {
   int? get star => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
   String? get answer => throw _privateConstructorUsedError;
-  @JsonKey(name: 'positive_tags')
+  @JsonKey(name: "positive_tags")
   List<int>? get positiveTags => throw _privateConstructorUsedError;
-  @JsonKey(name: 'negative_tags')
-  List<int>? get negativeTags => throw _privateConstructorUsedError;
-  @JsonKey(name: 'work_price')
-  double? get workPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'materials_price')
-  double? get materialsPprice => throw _privateConstructorUsedError;
+  @JsonKey(name: "negative_tags")
+  List<String>? get negativeTags => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_price")
+  String? get workPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: "materials_price")
+  String? get materialsPrice => throw _privateConstructorUsedError;
   List<String>? get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,10 +53,10 @@ abstract class $ReviewModelCopyWith<$Res> {
       int? star,
       String? text,
       String? answer,
-      @JsonKey(name: 'positive_tags') List<int>? positiveTags,
-      @JsonKey(name: 'negative_tags') List<int>? negativeTags,
-      @JsonKey(name: 'work_price') double? workPrice,
-      @JsonKey(name: 'materials_price') double? materialsPprice,
+      @JsonKey(name: "positive_tags") List<int>? positiveTags,
+      @JsonKey(name: "negative_tags") List<String>? negativeTags,
+      @JsonKey(name: "work_price") String? workPrice,
+      @JsonKey(name: "materials_price") String? materialsPrice,
       List<String>? images});
 
   $UserModelCopyWith<$Res>? get user;
@@ -83,7 +83,7 @@ class _$ReviewModelCopyWithImpl<$Res, $Val extends ReviewModel>
     Object? positiveTags = freezed,
     Object? negativeTags = freezed,
     Object? workPrice = freezed,
-    Object? materialsPprice = freezed,
+    Object? materialsPrice = freezed,
     Object? images = freezed,
   }) {
     return _then(_value.copyWith(
@@ -114,15 +114,15 @@ class _$ReviewModelCopyWithImpl<$Res, $Val extends ReviewModel>
       negativeTags: freezed == negativeTags
           ? _value.negativeTags
           : negativeTags // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
       workPrice: freezed == workPrice
           ? _value.workPrice
           : workPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      materialsPprice: freezed == materialsPprice
-          ? _value.materialsPprice
-          : materialsPprice // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
+      materialsPrice: freezed == materialsPrice
+          ? _value.materialsPrice
+          : materialsPrice // ignore: cast_nullable_to_non_nullable
+              as String?,
       images: freezed == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
@@ -157,10 +157,10 @@ abstract class _$$ReviewModelImplCopyWith<$Res>
       int? star,
       String? text,
       String? answer,
-      @JsonKey(name: 'positive_tags') List<int>? positiveTags,
-      @JsonKey(name: 'negative_tags') List<int>? negativeTags,
-      @JsonKey(name: 'work_price') double? workPrice,
-      @JsonKey(name: 'materials_price') double? materialsPprice,
+      @JsonKey(name: "positive_tags") List<int>? positiveTags,
+      @JsonKey(name: "negative_tags") List<String>? negativeTags,
+      @JsonKey(name: "work_price") String? workPrice,
+      @JsonKey(name: "materials_price") String? materialsPrice,
       List<String>? images});
 
   @override
@@ -186,7 +186,7 @@ class __$$ReviewModelImplCopyWithImpl<$Res>
     Object? positiveTags = freezed,
     Object? negativeTags = freezed,
     Object? workPrice = freezed,
-    Object? materialsPprice = freezed,
+    Object? materialsPrice = freezed,
     Object? images = freezed,
   }) {
     return _then(_$ReviewModelImpl(
@@ -217,15 +217,15 @@ class __$$ReviewModelImplCopyWithImpl<$Res>
       negativeTags: freezed == negativeTags
           ? _value._negativeTags
           : negativeTags // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
       workPrice: freezed == workPrice
           ? _value.workPrice
           : workPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      materialsPprice: freezed == materialsPprice
-          ? _value.materialsPprice
-          : materialsPprice // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
+      materialsPrice: freezed == materialsPrice
+          ? _value.materialsPrice
+          : materialsPrice // ignore: cast_nullable_to_non_nullable
+              as String?,
       images: freezed == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
@@ -243,10 +243,10 @@ class _$ReviewModelImpl implements _ReviewModel {
       this.star,
       this.text,
       this.answer,
-      @JsonKey(name: 'positive_tags') final List<int>? positiveTags,
-      @JsonKey(name: 'negative_tags') final List<int>? negativeTags,
-      @JsonKey(name: 'work_price') this.workPrice,
-      @JsonKey(name: 'materials_price') this.materialsPprice,
+      @JsonKey(name: "positive_tags") final List<int>? positiveTags,
+      @JsonKey(name: "negative_tags") final List<String>? negativeTags,
+      @JsonKey(name: "work_price") this.workPrice,
+      @JsonKey(name: "materials_price") this.materialsPrice,
       final List<String>? images})
       : _positiveTags = positiveTags,
         _negativeTags = negativeTags,
@@ -267,7 +267,7 @@ class _$ReviewModelImpl implements _ReviewModel {
   final String? answer;
   final List<int>? _positiveTags;
   @override
-  @JsonKey(name: 'positive_tags')
+  @JsonKey(name: "positive_tags")
   List<int>? get positiveTags {
     final value = _positiveTags;
     if (value == null) return null;
@@ -276,10 +276,10 @@ class _$ReviewModelImpl implements _ReviewModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<int>? _negativeTags;
+  final List<String>? _negativeTags;
   @override
-  @JsonKey(name: 'negative_tags')
-  List<int>? get negativeTags {
+  @JsonKey(name: "negative_tags")
+  List<String>? get negativeTags {
     final value = _negativeTags;
     if (value == null) return null;
     if (_negativeTags is EqualUnmodifiableListView) return _negativeTags;
@@ -288,11 +288,11 @@ class _$ReviewModelImpl implements _ReviewModel {
   }
 
   @override
-  @JsonKey(name: 'work_price')
-  final double? workPrice;
+  @JsonKey(name: "work_price")
+  final String? workPrice;
   @override
-  @JsonKey(name: 'materials_price')
-  final double? materialsPprice;
+  @JsonKey(name: "materials_price")
+  final String? materialsPrice;
   final List<String>? _images;
   @override
   List<String>? get images {
@@ -305,7 +305,7 @@ class _$ReviewModelImpl implements _ReviewModel {
 
   @override
   String toString() {
-    return 'ReviewModel(job: $job, user: $user, star: $star, text: $text, answer: $answer, positiveTags: $positiveTags, negativeTags: $negativeTags, workPrice: $workPrice, materialsPprice: $materialsPprice, images: $images)';
+    return 'ReviewModel(job: $job, user: $user, star: $star, text: $text, answer: $answer, positiveTags: $positiveTags, negativeTags: $negativeTags, workPrice: $workPrice, materialsPrice: $materialsPrice, images: $images)';
   }
 
   @override
@@ -324,8 +324,8 @@ class _$ReviewModelImpl implements _ReviewModel {
                 .equals(other._negativeTags, _negativeTags) &&
             (identical(other.workPrice, workPrice) ||
                 other.workPrice == workPrice) &&
-            (identical(other.materialsPprice, materialsPprice) ||
-                other.materialsPprice == materialsPprice) &&
+            (identical(other.materialsPrice, materialsPrice) ||
+                other.materialsPrice == materialsPrice) &&
             const DeepCollectionEquality().equals(other._images, _images));
   }
 
@@ -341,7 +341,7 @@ class _$ReviewModelImpl implements _ReviewModel {
       const DeepCollectionEquality().hash(_positiveTags),
       const DeepCollectionEquality().hash(_negativeTags),
       workPrice,
-      materialsPprice,
+      materialsPrice,
       const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
@@ -365,10 +365,10 @@ abstract class _ReviewModel implements ReviewModel {
       final int? star,
       final String? text,
       final String? answer,
-      @JsonKey(name: 'positive_tags') final List<int>? positiveTags,
-      @JsonKey(name: 'negative_tags') final List<int>? negativeTags,
-      @JsonKey(name: 'work_price') final double? workPrice,
-      @JsonKey(name: 'materials_price') final double? materialsPprice,
+      @JsonKey(name: "positive_tags") final List<int>? positiveTags,
+      @JsonKey(name: "negative_tags") final List<String>? negativeTags,
+      @JsonKey(name: "work_price") final String? workPrice,
+      @JsonKey(name: "materials_price") final String? materialsPrice,
       final List<String>? images}) = _$ReviewModelImpl;
 
   factory _ReviewModel.fromJson(Map<String, dynamic> json) =
@@ -385,17 +385,17 @@ abstract class _ReviewModel implements ReviewModel {
   @override
   String? get answer;
   @override
-  @JsonKey(name: 'positive_tags')
+  @JsonKey(name: "positive_tags")
   List<int>? get positiveTags;
   @override
-  @JsonKey(name: 'negative_tags')
-  List<int>? get negativeTags;
+  @JsonKey(name: "negative_tags")
+  List<String>? get negativeTags;
   @override
-  @JsonKey(name: 'work_price')
-  double? get workPrice;
+  @JsonKey(name: "work_price")
+  String? get workPrice;
   @override
-  @JsonKey(name: 'materials_price')
-  double? get materialsPprice;
+  @JsonKey(name: "materials_price")
+  String? get materialsPrice;
   @override
   List<String>? get images;
   @override

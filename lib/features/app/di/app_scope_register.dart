@@ -3,6 +3,7 @@ import 'package:everlook_mobile/data/dio/dio_client.dart';
 import 'package:everlook_mobile/data/dio/interceptors.dart';
 import 'package:everlook_mobile/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:everlook_mobile/source/imports.dart';
+import 'package:everlook_mobile/source/localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +18,7 @@ final class AppScopeRegister {
   Future<IAppScope> createScope(Environment env) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final appConfig = _createAppConfig(env, sharedPreferences);
-
+    final FlutterLocalization _localization = FlutterLocalization.instance;
     const dioConfigurator = DioClient();
     const storage = TokenStorageImpl(
       FlutterSecureStorage(
@@ -41,18 +42,72 @@ final class AppScopeRegister {
       ),
     );
 
+    _localization.init(
+      mapLocales: [
+        const MapLocale(
+          'en',
+          AppLocale.EN,
+          countryCode: 'US',
+          fontFamily: 'Prompt',
+        ),
+        const MapLocale(
+          'ru',
+          AppLocale.RU,
+          countryCode: 'RU',
+          fontFamily: 'Prompt',
+        ),
+        const MapLocale(
+          'ar',
+          AppLocale.AR,
+          countryCode: 'AE',
+          fontFamily: 'Prompt',
+        ),
+      ],
+      initLanguageCode: 'ru',
+    );
+
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    await FirebaseMessaging.instance.requestPermission(provisional: true);
+    if (Platform.isIOS) {
+      final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+      if (apnsToken != null) {
+        await storage.read().then((tokens) async {
+          await storage.write(
+            AuthTokenPair(
+              token: tokens?.token,
+              firebaseToken: apnsToken,
+            ),
+          );
+        });
+      }
+    } else {
+      final token = await FirebaseMessaging.instance.getToken();
+      if (token != null) {
+        await storage.read().then((tokens) async {
+          await storage.write(
+            AuthTokenPair(
+              token: tokens?.token,
+              firebaseToken: token,
+            ),
+          );
+        });
+      }
+    }
+
     return AppScope(
       appConfig: appConfig,
       sharedPreferences: sharedPreferences,
       dio: dio,
       tokenStorage: storage,
-      // authRepository: AuthRepository(
-      //   tokenStorage: storage,
-      //   service: AuthService(
-      //     dio,
-      //     baseUrl: baseUrl,
-      //   ),
-      // ),
+      localization: _localization,
+      fontSizeCoef: 1,
+      profileRepository: ProfileRepository(
+        tokenStorage: storage,
+        service: ProfileService(
+          dio,
+          baseUrl: appConfig.url,
+        ),
+      ),
     );
   }
 

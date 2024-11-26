@@ -5,14 +5,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<void> run(Environment env) async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  final fbOptions = env.firebaseOptions;
 
-  if (fbOptions != null) {
-    await Firebase.initializeApp(options: fbOptions);
+  if (env.firebaseOptions != null) {
+    await Firebase.initializeApp(options: env.firebaseOptions!);
   }
-
-  // TODO(init-project): Initialize Crashlytics.
-  _setupCrashlytics();
 
   // TODO(init-project): Change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -28,10 +24,12 @@ Future<void> _runApp(Environment env) async {
 }
 
 // ignore: unused_element
-void _setupCrashlytics() {
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true).ignore();
-    return true;
-  };
-}
+// void _setupCrashlytics() {
+//   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+//   PlatformDispatcher.instance.onError = (error, stack) {
+//     FirebaseCrashlytics.instance
+//         .recordError(error, stack, fatal: true)
+//         .ignore();
+//     return true;
+//   };
+// }

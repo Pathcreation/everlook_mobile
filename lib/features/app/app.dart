@@ -1,3 +1,4 @@
+import 'package:everlook_mobile/features/main_page.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -31,17 +32,24 @@ class _AppState extends State<App> {
     super.initState();
   }
 
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final appScope = context.read<IAppScope>();
+    appScope.localization.onTranslatedLanguage = _onTranslatedLanguage;
     // appScope.authRepository.currentUserStream.listen((value) {
     //
     // });
+
     handleAppLifecycleState(
       context: context,
       scope: appScope,
     );
     FlutterNativeSplash.remove();
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocProvider<AppBloc>(
@@ -77,13 +85,13 @@ class _AppState extends State<App> {
                 return RefreshConfiguration(
                   headerBuilder: () => CustomHeader(
                     builder: (context, status) {
-                      return const Center(
+                      return Center(
                         child: Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             bottom: 10,
                           ),
                           child: CircularProgressIndicator(
-                            color: AppColors.additional1,
+                            color: theme.colorScheme.primary,
                             strokeWidth: 1,
                           ),
                         ),

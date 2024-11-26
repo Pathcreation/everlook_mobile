@@ -20,7 +20,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   late BuildContext context;
-  // late IAuthRepository authRepo;
   late final IAppScope _appScope;
 
   void _onInitialEvent(
@@ -29,33 +28,22 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) async {
     try {
       emit(const _LoadingAppState());
-      await Future.delayed(const Duration(milliseconds: 400));
-      // authRepo = _appScope.authRepository;
-      emit(const _LoadingAppState());
       final tokens = await _appScope.tokenStorage.read();
-      // if (authRepo.currentUser == null && tokens?.accessToken != null) {
-      //   await authRepo.getCurrentUser().then((value) async {
-      //     user = value;
-      //     final firebaseToken = Preferences.loadFirebaseToken();
-      //     if (firebaseToken != null) {
-      //       user = value.copyWith(
-      //         firebaseToken: firebaseToken,
-      //         typeOs: defaultTargetPlatform == TargetPlatform.android
-      //             ? 'ANDROID'
-      //             : 'IOS',
-      //       );
-      //       await authRepo.editUser(user!);
-      //     }
-      //   });
-      // }
-      await Future.delayed(
-        const Duration(
-          seconds: 1,
-        ),
-        () {
-          emit(const _DataAppState());
-        },
-      );
+      if (tokens != null && tokens.token != null) {
+        if (tokens.firebaseToken != null) {
+          _appScope.profileRepository.getCurrentUser().then((value) {
+            user = value;
+            if (user != null) {
+              _appScope.profileRepository.updateUser(
+                user!.copyWith(
+                  deviceToken: tokens.firebaseToken!,
+                  platform: Platform.isAndroid ? 'android' : 'ios',
+                ),
+              );
+            }
+          });
+        }
+      }
     } on DioException catch (err) {
       if ((err.response?.statusCode ?? 0) > 500) {
         emit(
@@ -64,8 +52,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             pageState: PageState.error,
           ),
         );
-      } else if (err.response?.statusCode != 401 &&
-          err.response?.statusCode != 403) {
+      } else if (err.response?.statusCode != 401 && err.response?.statusCode != 403) {
         emit(
           _InfoAppState(
             message: err.response?.data["message"].toString() ?? '',
@@ -73,7 +60,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ),
         );
       }
-      emit(const _DataAppState());
     } catch (ex) {
       emit(
         _InfoAppState(
@@ -81,7 +67,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           pageState: PageState.error,
         ),
       );
-      emit(const _DataAppState());
     }
+    emit(const _DataAppState());
   }
 }

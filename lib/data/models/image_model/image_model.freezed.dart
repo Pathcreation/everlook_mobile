@@ -21,6 +21,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageModel {
   int? get id => throw _privateConstructorUsedError;
+  int? get review => throw _privateConstructorUsedError;
   int? get job => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get uuid => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $ImageModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
+      int? review,
       int? job,
       String? image,
       String? uuid,
@@ -62,6 +64,7 @@ class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
   @override
   $Res call({
     Object? id = freezed,
+    Object? review = freezed,
     Object? job = freezed,
     Object? image = freezed,
     Object? uuid = freezed,
@@ -72,6 +75,10 @@ class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      review: freezed == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
               as int?,
       job: freezed == job
           ? _value.job
@@ -107,6 +114,7 @@ abstract class _$$ImageModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
+      int? review,
       int? job,
       String? image,
       String? uuid,
@@ -126,6 +134,7 @@ class __$$ImageModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? review = freezed,
     Object? job = freezed,
     Object? image = freezed,
     Object? uuid = freezed,
@@ -136,6 +145,10 @@ class __$$ImageModelImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      review: freezed == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
               as int?,
       job: freezed == job
           ? _value.job
@@ -165,13 +178,21 @@ class __$$ImageModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ImageModelImpl implements _ImageModel {
   const _$ImageModelImpl(
-      {this.id, this.job, this.image, this.uuid, this.temp, this.thumb});
+      {this.id,
+      this.review,
+      this.job,
+      this.image,
+      this.uuid,
+      this.temp,
+      this.thumb});
 
   factory _$ImageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImageModelImplFromJson(json);
 
   @override
   final int? id;
+  @override
+  final int? review;
   @override
   final int? job;
   @override
@@ -185,7 +206,7 @@ class _$ImageModelImpl implements _ImageModel {
 
   @override
   String toString() {
-    return 'ImageModel(id: $id, job: $job, image: $image, uuid: $uuid, temp: $temp, thumb: $thumb)';
+    return 'ImageModel(id: $id, review: $review, job: $job, image: $image, uuid: $uuid, temp: $temp, thumb: $thumb)';
   }
 
   @override
@@ -194,6 +215,7 @@ class _$ImageModelImpl implements _ImageModel {
         (other.runtimeType == runtimeType &&
             other is _$ImageModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.review, review) || other.review == review) &&
             (identical(other.job, job) || other.job == job) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
@@ -204,7 +226,7 @@ class _$ImageModelImpl implements _ImageModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, job, image, uuid, temp, thumb);
+      Object.hash(runtimeType, id, review, job, image, uuid, temp, thumb);
 
   @JsonKey(ignore: true)
   @override
@@ -223,6 +245,7 @@ class _$ImageModelImpl implements _ImageModel {
 abstract class _ImageModel implements ImageModel {
   const factory _ImageModel(
       {final int? id,
+      final int? review,
       final int? job,
       final String? image,
       final String? uuid,
@@ -234,6 +257,8 @@ abstract class _ImageModel implements ImageModel {
 
   @override
   int? get id;
+  @override
+  int? get review;
   @override
   int? get job;
   @override

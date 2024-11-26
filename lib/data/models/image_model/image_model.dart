@@ -9,6 +9,7 @@ part 'image_model.g.dart';
 class ImageModel with _$ImageModel {
   const factory ImageModel({
     int? id,
+    int? review,
     int? job,
     String? image,
     String? uuid,

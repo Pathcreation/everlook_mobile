@@ -9,3 +9,4 @@ analyzer:
     - lib/**/*.g.dart
     - lib/assets/**
     - tools/bricks/**/__brick__/**
+    - bricks/**/__brick__/**

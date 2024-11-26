@@ -8,12 +8,14 @@ part of 'auth_token_pair.dart';
 
 AuthTokenPair _$AuthTokenPairFromJson(Map<String, dynamic> json) =>
     AuthTokenPair(
-      access: json['access'] as String,
-      refresh: json['refresh'] as String,
+      token: json['token'] as String?,
+      refresh: json['refresh'] as String?,
+      firebaseToken: json['firebaseToken'] as String?,
     );
 
 Map<String, dynamic> _$AuthTokenPairToJson(AuthTokenPair instance) =>
     <String, dynamic>{
-      'access': instance.access,
+      'token': instance.token,
       'refresh': instance.refresh,
+      'firebaseToken': instance.firebaseToken,
     };

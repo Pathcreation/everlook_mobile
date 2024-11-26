@@ -26,20 +26,21 @@ mixin _$JobModel {
   int? get structure => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
-  @JsonKey(name: 'allow_calls_from')
+  @JsonKey(name: "allow_calls_from")
   String? get allowCallsFrom => throw _privateConstructorUsedError;
-  @JsonKey(name: 'allow_calls_to')
+  @JsonKey(name: "allow_calls_to")
   String? get allowCallsTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'native_language')
+  @JsonKey(name: "native_language")
   String? get nativeLanguage => throw _privateConstructorUsedError;
-  @JsonKey(name: 'desired_price')
-  double? get desiredPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: "desired_price")
+  int? get desiredPrice => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  LocationModel? get location => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'start_date')
+  @JsonKey(name: "start_date")
   DateTime? get startDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'end_date')
+  @JsonKey(name: "end_date")
   DateTime? get endDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,17 +61,19 @@ abstract class $JobModelCopyWith<$Res> {
       int? structure,
       String? title,
       String? phone,
-      @JsonKey(name: 'allow_calls_from') String? allowCallsFrom,
-      @JsonKey(name: 'allow_calls_to') String? allowCallsTo,
-      @JsonKey(name: 'native_language') String? nativeLanguage,
-      @JsonKey(name: 'desired_price') double? desiredPrice,
+      @JsonKey(name: "allow_calls_from") String? allowCallsFrom,
+      @JsonKey(name: "allow_calls_to") String? allowCallsTo,
+      @JsonKey(name: "native_language") String? nativeLanguage,
+      @JsonKey(name: "desired_price") int? desiredPrice,
       String? address,
+      LocationModel? location,
       String? description,
       String? status,
-      @JsonKey(name: 'start_date') DateTime? startDate,
-      @JsonKey(name: 'end_date') DateTime? endDate});
+      @JsonKey(name: "start_date") DateTime? startDate,
+      @JsonKey(name: "end_date") DateTime? endDate});
 
   $UserModelCopyWith<$Res>? get user;
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -97,6 +100,7 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
     Object? nativeLanguage = freezed,
     Object? desiredPrice = freezed,
     Object? address = freezed,
+    Object? location = freezed,
     Object? description = freezed,
     Object? status = freezed,
     Object? startDate = freezed,
@@ -142,11 +146,15 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
       desiredPrice: freezed == desiredPrice
           ? _value.desiredPrice
           : desiredPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as int?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationModel?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -177,6 +185,18 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LocationModelCopyWith<$Res>? get location {
+    if (_value.location == null) {
+      return null;
+    }
+
+    return $LocationModelCopyWith<$Res>(_value.location!, (value) {
+      return _then(_value.copyWith(location: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -194,18 +214,21 @@ abstract class _$$JobModelImplCopyWith<$Res>
       int? structure,
       String? title,
       String? phone,
-      @JsonKey(name: 'allow_calls_from') String? allowCallsFrom,
-      @JsonKey(name: 'allow_calls_to') String? allowCallsTo,
-      @JsonKey(name: 'native_language') String? nativeLanguage,
-      @JsonKey(name: 'desired_price') double? desiredPrice,
+      @JsonKey(name: "allow_calls_from") String? allowCallsFrom,
+      @JsonKey(name: "allow_calls_to") String? allowCallsTo,
+      @JsonKey(name: "native_language") String? nativeLanguage,
+      @JsonKey(name: "desired_price") int? desiredPrice,
       String? address,
+      LocationModel? location,
       String? description,
       String? status,
-      @JsonKey(name: 'start_date') DateTime? startDate,
-      @JsonKey(name: 'end_date') DateTime? endDate});
+      @JsonKey(name: "start_date") DateTime? startDate,
+      @JsonKey(name: "end_date") DateTime? endDate});
 
   @override
   $UserModelCopyWith<$Res>? get user;
+  @override
+  $LocationModelCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -230,6 +253,7 @@ class __$$JobModelImplCopyWithImpl<$Res>
     Object? nativeLanguage = freezed,
     Object? desiredPrice = freezed,
     Object? address = freezed,
+    Object? location = freezed,
     Object? description = freezed,
     Object? status = freezed,
     Object? startDate = freezed,
@@ -275,11 +299,15 @@ class __$$JobModelImplCopyWithImpl<$Res>
       desiredPrice: freezed == desiredPrice
           ? _value.desiredPrice
           : desiredPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as int?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationModel?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -310,15 +338,16 @@ class _$JobModelImpl implements _JobModel {
       this.structure,
       this.title,
       this.phone,
-      @JsonKey(name: 'allow_calls_from') this.allowCallsFrom,
-      @JsonKey(name: 'allow_calls_to') this.allowCallsTo,
-      @JsonKey(name: 'native_language') this.nativeLanguage,
-      @JsonKey(name: 'desired_price') this.desiredPrice,
+      @JsonKey(name: "allow_calls_from") this.allowCallsFrom,
+      @JsonKey(name: "allow_calls_to") this.allowCallsTo,
+      @JsonKey(name: "native_language") this.nativeLanguage,
+      @JsonKey(name: "desired_price") this.desiredPrice,
       this.address,
+      this.location,
       this.description,
       this.status,
-      @JsonKey(name: 'start_date') this.startDate,
-      @JsonKey(name: 'end_date') this.endDate});
+      @JsonKey(name: "start_date") this.startDate,
+      @JsonKey(name: "end_date") this.endDate});
 
   factory _$JobModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobModelImplFromJson(json);
@@ -336,33 +365,35 @@ class _$JobModelImpl implements _JobModel {
   @override
   final String? phone;
   @override
-  @JsonKey(name: 'allow_calls_from')
+  @JsonKey(name: "allow_calls_from")
   final String? allowCallsFrom;
   @override
-  @JsonKey(name: 'allow_calls_to')
+  @JsonKey(name: "allow_calls_to")
   final String? allowCallsTo;
   @override
-  @JsonKey(name: 'native_language')
+  @JsonKey(name: "native_language")
   final String? nativeLanguage;
   @override
-  @JsonKey(name: 'desired_price')
-  final double? desiredPrice;
+  @JsonKey(name: "desired_price")
+  final int? desiredPrice;
   @override
   final String? address;
+  @override
+  final LocationModel? location;
   @override
   final String? description;
   @override
   final String? status;
   @override
-  @JsonKey(name: 'start_date')
+  @JsonKey(name: "start_date")
   final DateTime? startDate;
   @override
-  @JsonKey(name: 'end_date')
+  @JsonKey(name: "end_date")
   final DateTime? endDate;
 
   @override
   String toString() {
-    return 'JobModel(id: $id, user: $user, contractor: $contractor, structure: $structure, title: $title, phone: $phone, allowCallsFrom: $allowCallsFrom, allowCallsTo: $allowCallsTo, nativeLanguage: $nativeLanguage, desiredPrice: $desiredPrice, address: $address, description: $description, status: $status, startDate: $startDate, endDate: $endDate)';
+    return 'JobModel(id: $id, user: $user, contractor: $contractor, structure: $structure, title: $title, phone: $phone, allowCallsFrom: $allowCallsFrom, allowCallsTo: $allowCallsTo, nativeLanguage: $nativeLanguage, desiredPrice: $desiredPrice, address: $address, location: $location, description: $description, status: $status, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -387,6 +418,8 @@ class _$JobModelImpl implements _JobModel {
             (identical(other.desiredPrice, desiredPrice) ||
                 other.desiredPrice == desiredPrice) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.status, status) || other.status == status) &&
@@ -410,6 +443,7 @@ class _$JobModelImpl implements _JobModel {
       nativeLanguage,
       desiredPrice,
       address,
+      location,
       description,
       status,
       startDate,
@@ -437,15 +471,16 @@ abstract class _JobModel implements JobModel {
       final int? structure,
       final String? title,
       final String? phone,
-      @JsonKey(name: 'allow_calls_from') final String? allowCallsFrom,
-      @JsonKey(name: 'allow_calls_to') final String? allowCallsTo,
-      @JsonKey(name: 'native_language') final String? nativeLanguage,
-      @JsonKey(name: 'desired_price') final double? desiredPrice,
+      @JsonKey(name: "allow_calls_from") final String? allowCallsFrom,
+      @JsonKey(name: "allow_calls_to") final String? allowCallsTo,
+      @JsonKey(name: "native_language") final String? nativeLanguage,
+      @JsonKey(name: "desired_price") final int? desiredPrice,
       final String? address,
+      final LocationModel? location,
       final String? description,
       final String? status,
-      @JsonKey(name: 'start_date') final DateTime? startDate,
-      @JsonKey(name: 'end_date') final DateTime? endDate}) = _$JobModelImpl;
+      @JsonKey(name: "start_date") final DateTime? startDate,
+      @JsonKey(name: "end_date") final DateTime? endDate}) = _$JobModelImpl;
 
   factory _JobModel.fromJson(Map<String, dynamic> json) =
       _$JobModelImpl.fromJson;
@@ -463,28 +498,30 @@ abstract class _JobModel implements JobModel {
   @override
   String? get phone;
   @override
-  @JsonKey(name: 'allow_calls_from')
+  @JsonKey(name: "allow_calls_from")
   String? get allowCallsFrom;
   @override
-  @JsonKey(name: 'allow_calls_to')
+  @JsonKey(name: "allow_calls_to")
   String? get allowCallsTo;
   @override
-  @JsonKey(name: 'native_language')
+  @JsonKey(name: "native_language")
   String? get nativeLanguage;
   @override
-  @JsonKey(name: 'desired_price')
-  double? get desiredPrice;
+  @JsonKey(name: "desired_price")
+  int? get desiredPrice;
   @override
   String? get address;
+  @override
+  LocationModel? get location;
   @override
   String? get description;
   @override
   String? get status;
   @override
-  @JsonKey(name: 'start_date')
+  @JsonKey(name: "start_date")
   DateTime? get startDate;
   @override
-  @JsonKey(name: 'end_date')
+  @JsonKey(name: "end_date")
   DateTime? get endDate;
   @override
   @JsonKey(ignore: true)

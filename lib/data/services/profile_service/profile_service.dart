@@ -15,11 +15,37 @@ abstract class ProfileService {
     @Part() String? name,
   });
 
+  @POST(Endpoints.logout)
+  Future<void> logout({
+    @Part(name: 'device_token') required String deviceToken,
+  });
+
   @POST(Endpoints.registerContractor)
-  Future<AuthTokenPair?> registerContractor({
+  Future<bool> registerContractor({
     @Part() required String email,
     @Part() required String password,
     @Part() required String name,
     @Part() required String license,
   });
+
+  @POST(Endpoints.recoveryPassword)
+  Future<bool> recoveryPassword({
+    @Part() required String email,
+  });
+
+  @GET(Endpoints.profile)
+  Future<UserModel?> getCurrentUser();
+
+  @PUT(Endpoints.profile)
+  Future<UserModel?> updateUser({
+    @Body() required UserModel user,
+  });
+
+  @POST('${Endpoints.profile}/avatar')
+  Future<bool> updateAvatar({
+    @Part() required File avatar,
+  });
+
+  @DELETE('${Endpoints.profile}/avatar')
+  Future<bool> deleteAvatar();
 }

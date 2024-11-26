@@ -1,4 +1,5 @@
 import 'package:everlook_mobile/config/app_config.dart';
+import 'package:everlook_mobile/data/i_repositories/i_profile_repository.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +17,12 @@ final class AppScope implements IAppScope {
   final TokenStorageImpl tokenStorage;
   // @override
   // final IAuthRepository authRepository;
+  @override
+  final FlutterLocalization localization;
+  @override
+  final int fontSizeCoef;
+  @override
+  final IProfileRepository profileRepository;
 
 
   /// {@macro app_scope.class}
@@ -24,8 +31,12 @@ final class AppScope implements IAppScope {
     required this.sharedPreferences,
     required this.dio,
     required this.tokenStorage,
-    // required this.authRepository,
+    required this.localization,
+    required this.fontSizeCoef,
+    required this.profileRepository,
   });
+
+
 }
 
 /// {@macro app_scope.class}
@@ -42,6 +53,9 @@ abstract interface class IAppScope {
   /// FlutterSecureStorage
   TokenStorageImpl get tokenStorage;
 
-  // IAuthRepository get authRepository;
+  FlutterLocalization get localization;
 
+  int get fontSizeCoef;
+
+  IProfileRepository get profileRepository;
 }

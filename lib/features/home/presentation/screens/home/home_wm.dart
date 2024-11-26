@@ -14,12 +14,12 @@ HomeWM defaultHomeWMFactory(BuildContext context) {
 }
 
 /// Interface for [HomeWM].
-abstract interface class IHomeWM with ThemeIModelMixin implements IWidgetModel {}
+abstract interface class IHomeWM  implements IWidgetModel {}
 
 /// {@template home_wm.class}
 /// [WidgetModel] for [HomeScreen].
 /// {@endtemplate}
-final class HomeWM extends WidgetModel<HomeScreen, HomeModel> with ThemeWMMixin implements IHomeWM {
+final class HomeWM extends WidgetModel<HomeScreen, HomeModel>  implements IHomeWM {
 
   /// {@macro home_wm.class}
   HomeWM(super._model);

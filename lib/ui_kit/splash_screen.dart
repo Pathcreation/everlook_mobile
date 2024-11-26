@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppColors.background,
+        color: AppColors.white,
         child: Center(
           child: SizedBox(
             width: MediaQuery.sizeOf(context).width / 2,

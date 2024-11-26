@@ -22,7 +22,7 @@ class _JobsService implements JobsService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AuthTokenPair?> getJob(String id) async {
+  Future<AuthTokenPair?> getJob(String jobId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -34,7 +34,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/${id}',
+          '/jobs//{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -56,7 +56,10 @@ class _JobsService implements JobsService {
   }
 
   @override
-  Future<JobModel?> editJob(JobModel job) async {
+  Future<JobModel?> editJob(
+    String jobId,
+    JobModel job,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -68,7 +71,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/{id}',
+          '/jobs//{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -101,7 +104,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs',
+          '/jobs/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -122,7 +125,7 @@ class _JobsService implements JobsService {
   }
 
   @override
-  Future<bool> deleteJob(String id) async {
+  Future<bool> deleteJob(String jobId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -134,7 +137,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/${id}',
+          '/jobs//{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -157,12 +160,14 @@ class _JobsService implements JobsService {
   @override
   Future<List<JobModel>?> getJobs({
     required int userId,
+    required int contractorId,
     required bool active,
     required bool archived,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'user': userId,
+      r'contractor': contractorId,
       r'active': active,
       r'archived': archived,
     };
@@ -175,7 +180,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs',
+          '/jobs/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -210,7 +215,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/${id}/reviews',
+          '/jobs//${id}/reviews',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -233,19 +238,19 @@ class _JobsService implements JobsService {
   }
 
   @override
-  Future<List<ReviewModel>> jobImage(String id) async {
+  Future<List<ImageModel>> jobImage(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ReviewModel>>(Options(
+    final _options = _setStreamType<List<ImageModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/jobs/${id}/images',
+          '/jobs//${id}/images',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -255,10 +260,10 @@ class _JobsService implements JobsService {
           baseUrl,
         )));
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ReviewModel> _value;
+    late List<ImageModel> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) => ReviewModel.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => ImageModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -280,16 +285,13 @@ class _JobsService implements JobsService {
       'job',
       job,
     ));
-    if (image != null) {
-      _data.files.add(MapEntry(
-        'image',
-        MultipartFile.fromFileSync(
-          image.path,
-          filename: image.path.split(Platform.pathSeparator).last,
-          contentType: MediaType.parse('application/json'),
-        ),
-      ));
-    }
+    _data.files.add(MapEntry(
+      'image',
+      MultipartFile.fromFileSync(
+        image.path,
+        filename: image.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     final _options = _setStreamType<ImageModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -298,7 +300,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/images/upload',
+          '/jobs//images/upload',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -319,19 +321,19 @@ class _JobsService implements JobsService {
   }
 
   @override
-  Future<JobModel?> deleteImagesJob(String id) async {
+  Future<bool?> deleteImagesJob(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<JobModel>(Options(
+    final _options = _setStreamType<bool>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/jobs/images/${id}/delete/s/create}',
+          '/jobs//images/${id}/delete/s/create}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -340,10 +342,53 @@ class _JobsService implements JobsService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late JobModel? _value;
+    final _result = await _dio.fetch<bool>(_options);
+    late bool? _value;
     try {
-      _value = _result.data == null ? null : JobModel.fromJson(_result.data!);
+      _value = _result.data;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<JobModel>> getJobByLocation(
+    String distance,
+    String latitude,
+    String longitude,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'distance': distance,
+      r'latitude': latitude,
+      r'longitude': longitude,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<JobModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/jobs//location',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<JobModel> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) => JobModel.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

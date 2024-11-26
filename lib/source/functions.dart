@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:everlook_mobile/source/extensions.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:everlook_mobile/source/imports.dart';
 
@@ -45,6 +46,7 @@ void showMessageDialog({
   Function()? onTap,
 }) {
   WidgetsBinding.instance.addPostFrameCallback((_) {
+    final theme = Theme.of(context);
     showDialog(
       context: context,
       builder: (_) {
@@ -52,15 +54,15 @@ void showMessageDialog({
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          backgroundColor: AppColors.post,
+          backgroundColor: AppColors.white,
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style:  TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w400,
               fontSize: 14.0,
-              color: AppColors.white,
+              color: theme.colorScheme.surface,
             ),
           ),
           actions: [
@@ -87,7 +89,7 @@ Color getMessageColor(PageState type) {
     case PageState.success:
       return AppColors.green;
     case PageState.info:
-      return AppColors.userColor1;
+      return AppColors.primary;
     case PageState.isEmpty:
     case PageState.hasData:
     case PageState.load:

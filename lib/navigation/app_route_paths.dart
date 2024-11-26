@@ -7,5 +7,8 @@
 /// ```
 abstract class AppRoutePaths {
   /// Path to home screen.
-  static const home = '/home';
+  static const main = '/';
+  static const auth = '/auth';
+  static const home = 'home';
+  static const profile = 'profile';
 }

@@ -36,10 +36,9 @@ enum NotificationType {
 
 /// Navigation bar item type
 enum IconsType {
-  home,
-  discussions,
-  add,
-  messages,
+  newJob,
+  offers,
+  notify,
   profile,
 }
 

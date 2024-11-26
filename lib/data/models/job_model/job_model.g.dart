@@ -19,8 +19,11 @@ _$JobModelImpl _$$JobModelImplFromJson(Map<String, dynamic> json) =>
       allowCallsFrom: json['allow_calls_from'] as String?,
       allowCallsTo: json['allow_calls_to'] as String?,
       nativeLanguage: json['native_language'] as String?,
-      desiredPrice: (json['desired_price'] as num?)?.toDouble(),
+      desiredPrice: (json['desired_price'] as num?)?.toInt(),
       address: json['address'] as String?,
+      location: json['location'] == null
+          ? null
+          : LocationModel.fromJson(json['location'] as Map<String, dynamic>),
       description: json['description'] as String?,
       status: json['status'] as String?,
       startDate: json['start_date'] == null
@@ -44,6 +47,7 @@ Map<String, dynamic> _$$JobModelImplToJson(_$JobModelImpl instance) =>
       'native_language': instance.nativeLanguage,
       'desired_price': instance.desiredPrice,
       'address': instance.address,
+      'location': instance.location,
       'description': instance.description,
       'status': instance.status,
       'start_date': instance.startDate?.toIso8601String(),

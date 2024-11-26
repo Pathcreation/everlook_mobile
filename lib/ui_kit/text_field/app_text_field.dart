@@ -17,10 +17,10 @@ class AppTextField extends StatefulWidget {
     this.hintText,
     this.subLabelText,
     this.labelText,
+    this.title,
     this.color,
     this.onChange,
     this.onComplete,
-    this.onTap,
     this.formKey,
     this.maxLines = 1,
     this.readOnly = true,
@@ -30,20 +30,12 @@ class AppTextField extends StatefulWidget {
     this.prefixConstraints,
     this.suffixConstraints,
     this.width,
-    this.radius = const BorderRadius.vertical(
-      top: Radius.circular(4),
-      bottom: Radius.circular(0),
-    ),
-    this.colorBorder,
     this.textLength,
     this.textInputFormatter,
     this.obscureText,
     this.autofillHints,
     this.textInputAction,
-    this.height = 56,
     this.minHeight = 45,
-    this.showSelectCountry,
-    this.isRequired = false,
     this.isLink = false,
     this.contentPadding,
     this.hintStyle,
@@ -51,21 +43,21 @@ class AppTextField extends StatefulWidget {
     this.labelStyle,
     this.suffixText,
     this.label,
-    this.isDense = false,
-    this.showBorder = true,
+    this.isDense,
     this.paddingSuffix,
+    this.textAlign,
   }) : super(key: key);
 
   final TextEditingController textController;
   final FocusNode? focusNode;
   final TextFieldType type;
   final String? hintText;
+  final String? title;
   final String? labelText;
   final String? subLabelText;
   final Color? color;
   final Function(String)? onChange;
   final Function()? onComplete;
-  final Function()? onTap;
   final GlobalKey<FormState>? formKey;
   final bool readOnly;
   final bool enableFocus;
@@ -77,25 +69,20 @@ class AppTextField extends StatefulWidget {
   final BoxConstraints? prefixConstraints;
   final BoxConstraints? suffixConstraints;
   final double? width;
-  final BorderRadius radius;
-  final Color? colorBorder;
   final int? textLength;
   final TextInputFormatter? textInputFormatter;
   final bool? obscureText;
   final List<String>? autofillHints;
   final TextInputAction? textInputAction;
-  final double height;
   final double minHeight;
-  final bool? showSelectCountry;
-  final bool isRequired;
   final EdgeInsets? contentPadding;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
   final TextStyle? subLabelStyle;
   final bool isLink;
-  final bool isDense;
-  final bool showBorder;
+  final bool? isDense;
   final EdgeInsets? paddingSuffix;
+  final TextAlign? textAlign;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -173,12 +160,12 @@ class _AppTextFieldState extends State<AppTextField> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.labelText != null)
+          if (widget.title != null)
             Text(
-              widget.labelText!,
+              widget.title!,
               style: widget.labelStyle ??
-                  const TextStyle(
-                    color: AppColors.additional2,
+                  TextStyle(
+                    color: theme.colorScheme.tertiary,
                   ),
             ),
           if (widget.label != null) widget.label!,
@@ -190,40 +177,28 @@ class _AppTextFieldState extends State<AppTextField> {
                   key: widget.formKey,
                   child: TextFormField(
                     enabled: true,
-                    cursorColor: AppColors.additional4,
+                    cursorColor: theme.colorScheme.primary,
                     enableIMEPersonalizedLearning: true,
-                    textAlignVertical:
-                        widget.prefix != null || widget.suffix != null
-                            ? TextAlignVertical.top
-                            : null,
+                    textAlignVertical: widget.prefix != null || widget.suffix != null ? TextAlignVertical.top : null,
                     inputFormatters: [
                       if (widget.type == TextFieldType.name) Format.nameFormat,
                       if (_mask != null) _mask!,
-                      if (widget.textLength != null)
-                        LengthLimitingTextInputFormatter(widget.textLength!),
-                      if (widget.textInputFormatter != null)
-                        widget.textInputFormatter!,
+                      if (widget.textLength != null) LengthLimitingTextInputFormatter(widget.textLength!),
+                      if (widget.textInputFormatter != null) widget.textInputFormatter!,
                     ],
                     autofillHints: widget.autofillHints,
-                    textInputAction: widget.textInputAction ??
-                        (defaultTargetPlatform == TargetPlatform.iOS
-                            ? TextInputAction.done
-                            : TextInputAction.none),
+                    textInputAction: widget.textInputAction ?? (defaultTargetPlatform == TargetPlatform.iOS ? TextInputAction.done : TextInputAction.none),
                     maxLines: widget.maxLines,
+                    minLines: 1,
+                    textAlign: widget.textAlign ?? TextAlign.start,
                     controller: widget.textController,
                     focusNode: widget.focusNode,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
+                    style: theme.textTheme.headlineMedium!.copyWith(
                       color: isHashtag
                           ? null
                           : widget.isLink
-                              ? AppColors.secondary
-                              : AppColors.white,
-                      decoration: TextDecoration.none,
-                      decorationColor: Colors.transparent,
-                      decorationThickness: 0,
-                      height: 1.21,
+                              ? theme.colorScheme.primary
+                              : theme.colorScheme.tertiary,
                       foreground: isHashtag ? paint : null,
                     ),
                     readOnly: !widget.readOnly,
@@ -247,31 +222,19 @@ class _AppTextFieldState extends State<AppTextField> {
                       _errorText.add(error ?? '');
                       return error;
                     },
-                    textCapitalization: (widget.type == TextFieldType.name ||
-                            widget.type == TextFieldType.text)
-                        ? TextCapitalization.sentences
-                        : TextCapitalization.none,
+                    textCapitalization: (widget.type == TextFieldType.name || widget.type == TextFieldType.text) ? TextCapitalization.sentences : TextCapitalization.none,
                     decoration: InputDecoration(
-                      contentPadding: widget.contentPadding ??
-                          const EdgeInsets.only(bottom: 5),
-                      fillColor: widget.color ?? AppColors.background,
+                      contentPadding: widget.contentPadding,
+                      fillColor: widget.color ?? theme.colorScheme.surface,
                       filled: true,
-                      constraints: BoxConstraints(
-                        maxHeight: widget.height,
-                        minHeight: widget.minHeight,
-                        minWidth: double.infinity,
-                        maxWidth: double.infinity,
-                      ),
                       errorStyle: const TextStyle(
                         fontSize: 0,
                         height: 0,
                       ),
+                      labelText: widget.labelText,
+                      labelStyle: widget.labelStyle ?? theme.textTheme.bodySmall,
                       hintText: widget.hintText,
-                      hintStyle: widget.hintStyle ??
-                          const TextStyle(
-                            fontSize: 18,
-                            color: AppColors.additional2,
-                          ),
+                      hintStyle: widget.hintStyle ?? theme.textTheme.headlineMedium,
                       isDense: widget.isDense,
                       hoverColor: Colors.transparent,
                       prefixIcon: widget.prefix,
@@ -293,7 +256,7 @@ class _AppTextFieldState extends State<AppTextField> {
                             ).toDouble(),
                           ),
                       suffixStyle: theme.textTheme.bodyLarge!.copyWith(
-                        color: AppColors.additional2,
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -315,23 +278,10 @@ class _AppTextFieldState extends State<AppTextField> {
                 ),
             ],
           ),
-          if (widget.showBorder)
-            const Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: Divider(
-                height: 1,
-                thickness: 1,
-                color: AppColors.additional4,
-              ),
-            ),
           if (widget.subLabelText != null)
             Text(
               widget.subLabelText!,
-              style: widget.subLabelStyle ??
-                  const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.additional2,
-                  ),
+              style: widget.subLabelStyle ?? theme.textTheme.headlineMedium,
             ),
         ],
       ),

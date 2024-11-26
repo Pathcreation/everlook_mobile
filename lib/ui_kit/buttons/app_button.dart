@@ -7,25 +7,23 @@ class AppButton extends StatefulWidget {
     required this.title,
     required this.onPressed,
     this.isDisabled = false,
-    this.isVibrate = false,
-    this.height = 44,
-    this.width = 300,
+    this.height = 46,
+    this.width,
     this.textColor,
-    this.color = AppColors.background,
+    this.color,
     this.fontSize = 16,
-    this.borderRadius = 35,
+    this.icon,
   }) : super(key: key);
 
   final Function() onPressed;
   final String title;
   final double height;
-  final double width;
+  final double? width;
   final bool isDisabled;
-  final bool isVibrate;
   final Color? textColor;
-  final Color color;
+  final Color? color;
   final double fontSize;
-  final double borderRadius;
+  final String? icon;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -36,75 +34,47 @@ class _AppButtonState extends State<AppButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      hoverColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () {
+    final theme = Theme.of(context);
+    return ElevatedButton(
+      style: theme.elevatedButtonTheme.style!.copyWith(
+        backgroundColor: WidgetStatePropertyAll<Color>(
+          widget.color ?? theme.colorScheme.primary,
+        ),
+        visualDensity: VisualDensity.compact,
+      ),
+      onPressed: () {
         if (!widget.isDisabled) {
           widget.onPressed();
         }
       },
-      onHighlightChanged: (value) {
-        if (value) {
-          setState(() {
-            isPressed = true;
-          });
-        } else {
-          setState(() {
-            isPressed = false;
-          });
-        }
-      },
       child: SizedBox(
-        width: widget.width,
         height: widget.height,
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 0),
-            child: Center(
-              child: widget.textColor == null
-                  ? ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (bounds) => gradientButton.createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+        width: widget.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (widget.icon != null)
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 10,
                 ),
-                child: AnimatedScale(
-                  scale: isPressed ? 0.95 : 1,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  child: Text(
-                    widget.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(
-                      fontSize: widget.fontSize,
-                      color: widget.textColor,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                child: SvgPicture.asset(
+                  widget.icon!,
                 ),
-              )
-                  : Text(
-                widget.title,
-                style:
-                Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: widget.fontSize,
-                  color: widget.textColor,
-                  fontWeight: FontWeight.normal,
-                ),
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
               ),
+            Text(
+              widget.title,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: widget.fontSize,
+                    color: widget.textColor ?? theme.colorScheme.surface,
+                    fontWeight: FontWeight.normal,
+                  ),
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
             ),
-          );
-        }),
+          ],
+        ),
       ),
     );
   }
