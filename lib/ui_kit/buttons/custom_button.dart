@@ -47,7 +47,7 @@ class CustomButton extends StatelessWidget {
             textColor: textColor,
             color: Colors.transparent,
             fontSize: fontSize,
-            icon: icon,
+            leftIcon: icon,
           ),
         ],
       ),

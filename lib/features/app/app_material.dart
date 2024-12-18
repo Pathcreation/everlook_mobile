@@ -2,7 +2,7 @@ import 'package:everlook_mobile/navigation/app_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
-import 'app.dart';
+import 'app_flow.dart';
 
 class AppMaterial extends StatefulWidget {
   const AppMaterial({
@@ -50,22 +50,15 @@ class _AppMaterialState extends State<AppMaterial> {
             checkerboardOffscreenLayers: false,
             debugShowCheckedModeBanner: false,
             title: 'Everlook',
-            routerConfig: _appRouter.config(),
+            routerConfig: _appRouter.config(
+              navigatorObservers: () => [MyObserver()],
+            ),
             supportedLocales: appScope.localization.supportedLocales,
             localizationsDelegates: appScope.localization.localizationsDelegates,
             locale: appScope.localization.currentLocale ?? const Locale('ru'),
             theme: theme,
             darkTheme: darkTheme,
-            builder: (context, widget) {
-              return GestureDetector(
-                onTap: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                child: App(
-                  child: widget ?? const SplashScreen(),
-                ),
-              );
-            },
+
           );
         },
       ),

@@ -9,14 +9,10 @@ part 'image_model.g.dart';
 class ImageModel with _$ImageModel {
   const factory ImageModel({
     int? id,
-    int? review,
+    String? preview,
+    @JsonKey(name: 'big_preview') String? bigPreview,
     int? job,
-    String? image,
-    String? uuid,
-    bool? temp,
-    String? thumb,
   }) = _ImageModel;
 
-  factory ImageModel.fromJson(Map<String, dynamic> json) =>
-      _$ImageModelFromJson(json);
+  factory ImageModel.fromJson(Map<String, dynamic> json) => _$ImageModelFromJson(json);
 }

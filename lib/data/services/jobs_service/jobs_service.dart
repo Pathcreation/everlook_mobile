@@ -1,7 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:everlook_mobile/data/models/image_model/image_model.dart';
-import 'package:everlook_mobile/data/models/job_model/job_model.dart';
-import 'package:everlook_mobile/data/models/review_model/review_model.dart';
 import 'package:everlook_mobile/source/endpoints.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:retrofit/retrofit.dart';
@@ -69,4 +65,10 @@ abstract class JobsService {
     @Query('latitude') String latitude,
     @Query('longitude') String longitude,
   );
+
+  @GET(Endpoints.structure)
+  Future<List<ActivityModel>?> getActivities({
+    @Query('lang') String? lang,
+    @Query('parent') int? parent,
+  });
 }

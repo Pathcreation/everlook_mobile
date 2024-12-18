@@ -21,15 +21,17 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageModel {
   int? get id => throw _privateConstructorUsedError;
-  int? get review => throw _privateConstructorUsedError;
+  String? get preview => throw _privateConstructorUsedError;
+  @JsonKey(name: 'big_preview')
+  String? get bigPreview => throw _privateConstructorUsedError;
   int? get job => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  String? get uuid => throw _privateConstructorUsedError;
-  bool? get temp => throw _privateConstructorUsedError;
-  String? get thumb => throw _privateConstructorUsedError;
 
+  /// Serializes this ImageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ImageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ImageModelCopyWith<ImageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,12 +44,9 @@ abstract class $ImageModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int? review,
-      int? job,
-      String? image,
-      String? uuid,
-      bool? temp,
-      String? thumb});
+      String? preview,
+      @JsonKey(name: 'big_preview') String? bigPreview,
+      int? job});
 }
 
 /// @nodoc
@@ -60,46 +59,33 @@ class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ImageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? review = freezed,
+    Object? preview = freezed,
+    Object? bigPreview = freezed,
     Object? job = freezed,
-    Object? image = freezed,
-    Object? uuid = freezed,
-    Object? temp = freezed,
-    Object? thumb = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      review: freezed == review
-          ? _value.review
-          : review // ignore: cast_nullable_to_non_nullable
-              as int?,
+      preview: freezed == preview
+          ? _value.preview
+          : preview // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bigPreview: freezed == bigPreview
+          ? _value.bigPreview
+          : bigPreview // ignore: cast_nullable_to_non_nullable
+              as String?,
       job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
               as int?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uuid: freezed == uuid
-          ? _value.uuid
-          : uuid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      temp: freezed == temp
-          ? _value.temp
-          : temp // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      thumb: freezed == thumb
-          ? _value.thumb
-          : thumb // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -114,12 +100,9 @@ abstract class _$$ImageModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      int? review,
-      int? job,
-      String? image,
-      String? uuid,
-      bool? temp,
-      String? thumb});
+      String? preview,
+      @JsonKey(name: 'big_preview') String? bigPreview,
+      int? job});
 }
 
 /// @nodoc
@@ -130,46 +113,33 @@ class __$$ImageModelImplCopyWithImpl<$Res>
       _$ImageModelImpl _value, $Res Function(_$ImageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ImageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? review = freezed,
+    Object? preview = freezed,
+    Object? bigPreview = freezed,
     Object? job = freezed,
-    Object? image = freezed,
-    Object? uuid = freezed,
-    Object? temp = freezed,
-    Object? thumb = freezed,
   }) {
     return _then(_$ImageModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      review: freezed == review
-          ? _value.review
-          : review // ignore: cast_nullable_to_non_nullable
-              as int?,
+      preview: freezed == preview
+          ? _value.preview
+          : preview // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bigPreview: freezed == bigPreview
+          ? _value.bigPreview
+          : bigPreview // ignore: cast_nullable_to_non_nullable
+              as String?,
       job: freezed == job
           ? _value.job
           : job // ignore: cast_nullable_to_non_nullable
               as int?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uuid: freezed == uuid
-          ? _value.uuid
-          : uuid // ignore: cast_nullable_to_non_nullable
-              as String?,
-      temp: freezed == temp
-          ? _value.temp
-          : temp // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      thumb: freezed == thumb
-          ? _value.thumb
-          : thumb // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -179,12 +149,9 @@ class __$$ImageModelImplCopyWithImpl<$Res>
 class _$ImageModelImpl implements _ImageModel {
   const _$ImageModelImpl(
       {this.id,
-      this.review,
-      this.job,
-      this.image,
-      this.uuid,
-      this.temp,
-      this.thumb});
+      this.preview,
+      @JsonKey(name: 'big_preview') this.bigPreview,
+      this.job});
 
   factory _$ImageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ImageModelImplFromJson(json);
@@ -192,21 +159,16 @@ class _$ImageModelImpl implements _ImageModel {
   @override
   final int? id;
   @override
-  final int? review;
+  final String? preview;
+  @override
+  @JsonKey(name: 'big_preview')
+  final String? bigPreview;
   @override
   final int? job;
-  @override
-  final String? image;
-  @override
-  final String? uuid;
-  @override
-  final bool? temp;
-  @override
-  final String? thumb;
 
   @override
   String toString() {
-    return 'ImageModel(id: $id, review: $review, job: $job, image: $image, uuid: $uuid, temp: $temp, thumb: $thumb)';
+    return 'ImageModel(id: $id, preview: $preview, bigPreview: $bigPreview, job: $job)';
   }
 
   @override
@@ -215,20 +177,19 @@ class _$ImageModelImpl implements _ImageModel {
         (other.runtimeType == runtimeType &&
             other is _$ImageModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.review, review) || other.review == review) &&
-            (identical(other.job, job) || other.job == job) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.uuid, uuid) || other.uuid == uuid) &&
-            (identical(other.temp, temp) || other.temp == temp) &&
-            (identical(other.thumb, thumb) || other.thumb == thumb));
+            (identical(other.preview, preview) || other.preview == preview) &&
+            (identical(other.bigPreview, bigPreview) ||
+                other.bigPreview == bigPreview) &&
+            (identical(other.job, job) || other.job == job));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, review, job, image, uuid, temp, thumb);
+  int get hashCode => Object.hash(runtimeType, id, preview, bigPreview, job);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ImageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageModelImplCopyWith<_$ImageModelImpl> get copyWith =>
@@ -245,12 +206,9 @@ class _$ImageModelImpl implements _ImageModel {
 abstract class _ImageModel implements ImageModel {
   const factory _ImageModel(
       {final int? id,
-      final int? review,
-      final int? job,
-      final String? image,
-      final String? uuid,
-      final bool? temp,
-      final String? thumb}) = _$ImageModelImpl;
+      final String? preview,
+      @JsonKey(name: 'big_preview') final String? bigPreview,
+      final int? job}) = _$ImageModelImpl;
 
   factory _ImageModel.fromJson(Map<String, dynamic> json) =
       _$ImageModelImpl.fromJson;
@@ -258,19 +216,17 @@ abstract class _ImageModel implements ImageModel {
   @override
   int? get id;
   @override
-  int? get review;
+  String? get preview;
+  @override
+  @JsonKey(name: 'big_preview')
+  String? get bigPreview;
   @override
   int? get job;
+
+  /// Create a copy of ImageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String? get image;
-  @override
-  String? get uuid;
-  @override
-  bool? get temp;
-  @override
-  String? get thumb;
-  @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ImageModelImplCopyWith<_$ImageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

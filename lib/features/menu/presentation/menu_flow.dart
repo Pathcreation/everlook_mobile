@@ -1,8 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/common/widgets/di_scope.dart';
-import 'package:everlook_mobile/features/menu/data/repositories/menu_repository.dart';
-import 'package:everlook_mobile/features/menu/di/menu_scope.dart';
 import 'package:everlook_mobile/features/menu/presentation/screens/menu/menu_screen.dart';
 
 /// {@template menu_flow.class}
@@ -15,10 +12,9 @@ class MenuFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    const repository = MenuRepository();
-
-    return DiScope<IMenuScope>(
-      factory: (context) => MenuScope(repository),
+    final appScope = context.read<IAppScope>();
+    return DiScope<IAppScope>(
+      factory: (context) => appScope,
       onDispose: (scope) => scope.dispose(),
       child: this,
     );

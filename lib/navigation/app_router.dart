@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:everlook_mobile/features/app/app_flow.dart';
 import 'package:everlook_mobile/features/auth/presentation/auth_flow.dart';
 import 'package:everlook_mobile/features/main_page.dart';
+import 'package:everlook_mobile/features/notify/presentation/notify_flow.dart';
+import 'package:everlook_mobile/features/profile/presentation/profile_flow.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
 import 'app_route_paths.dart';
@@ -16,62 +19,94 @@ part 'app_router.gr.dart';
 )
 class AppRouter extends _$AppRouter {
   @override
+  @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: MainRoute.page,
-          path: AppRoutePaths.main,
+          page: AppRoute.page,
+          initial: true,
           guards: [AuthGuard()],
           children: [
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
               page: HomeRoute.page,
-              path: AppRoutePaths.home,
             ),
-            AutoRoute(
-              page: ProfileRoute.page,
-              path: AppRoutePaths.profile,
-            ),
-            AutoRoute(
-              page: ActivitiesRoute.page,
-            ),
-            AutoRoute(
-              page: FavoritesRoute.page,
-            ),
-            AutoRoute(
-              page: MyOfferRoute.page,
-            ),
-            AutoRoute(
-              page: NewJobRoute.page,
-            ),
-            AutoRoute(
-              page: OfferRequestRoute.page,
-            ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
               page: OffersRoute.page,
+              initial: true,
             ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: NotifyRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
               page: MenuRoute.page,
             ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: ProfileRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: ActivitiesRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: FavoritesRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: MyOfferRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: NewJobRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: OfferRequestRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
               page: RejectedOffersRoute.page,
             ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
               page: ReviewsRoute.page,
             ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
               page: SettingsRoute.page,
             ),
-            AutoRoute(
+            CustomRoute(
+              barrierColor: Colors.white,
               page: SupportRoute.page,
             ),
-            // AutoRoute(
-            //   page: AuthRoute.page,
-            //   path: AppRoutePaths.auth,
-            // ),
           ],
         ),
-        AutoRoute(
+        CustomRoute(
+          barrierColor: Colors.white,
           page: AuthRoute.page,
-          path: AppRoutePaths.auth,
+          keepHistory: false,
         ),
       ];
+}
+
+class MyObserver extends AutoRouterObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    print('New route pushed: ${route.settings.name}');
+  }
+
+  // only override to observer tab routes
+  @override
+  void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
+    print('Tab route visited: ${route.name}');
+  }
+
+  @override
+  void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
+    print('Tab route re-visited: ${route.name}');
+  }
 }

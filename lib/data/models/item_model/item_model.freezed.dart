@@ -24,9 +24,15 @@ mixin _$ItemModel {
   String? get answer => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get header => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
 
+  /// Serializes this ItemModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ItemModelCopyWith<ItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,7 +42,13 @@ abstract class $ItemModelCopyWith<$Res> {
   factory $ItemModelCopyWith(ItemModel value, $Res Function(ItemModel) then) =
       _$ItemModelCopyWithImpl<$Res, ItemModel>;
   @useResult
-  $Res call({int? id, String? answer, String? name, String? description});
+  $Res call(
+      {int? id,
+      String? answer,
+      String? name,
+      String? description,
+      String? header,
+      String? text});
 }
 
 /// @nodoc
@@ -49,6 +61,8 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -56,6 +70,8 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
     Object? answer = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? header = freezed,
+    Object? text = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -74,6 +90,14 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -86,7 +110,13 @@ abstract class _$$ItemModelImplCopyWith<$Res>
       __$$ItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? answer, String? name, String? description});
+  $Res call(
+      {int? id,
+      String? answer,
+      String? name,
+      String? description,
+      String? header,
+      String? text});
 }
 
 /// @nodoc
@@ -97,6 +127,8 @@ class __$$ItemModelImplCopyWithImpl<$Res>
       _$ItemModelImpl _value, $Res Function(_$ItemModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ItemModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,6 +136,8 @@ class __$$ItemModelImplCopyWithImpl<$Res>
     Object? answer = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? header = freezed,
+    Object? text = freezed,
   }) {
     return _then(_$ItemModelImpl(
       id: freezed == id
@@ -122,6 +156,14 @@ class __$$ItemModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -129,7 +171,13 @@ class __$$ItemModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ItemModelImpl implements _ItemModel {
-  const _$ItemModelImpl({this.id, this.answer, this.name, this.description});
+  const _$ItemModelImpl(
+      {this.id,
+      this.answer,
+      this.name,
+      this.description,
+      this.header,
+      this.text});
 
   factory _$ItemModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ItemModelImplFromJson(json);
@@ -142,10 +190,14 @@ class _$ItemModelImpl implements _ItemModel {
   final String? name;
   @override
   final String? description;
+  @override
+  final String? header;
+  @override
+  final String? text;
 
   @override
   String toString() {
-    return 'ItemModel(id: $id, answer: $answer, name: $name, description: $description)';
+    return 'ItemModel(id: $id, answer: $answer, name: $name, description: $description, header: $header, text: $text)';
   }
 
   @override
@@ -157,14 +209,19 @@ class _$ItemModelImpl implements _ItemModel {
             (identical(other.answer, answer) || other.answer == answer) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.header, header) || other.header == header) &&
+            (identical(other.text, text) || other.text == text));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, answer, name, description);
+  int get hashCode =>
+      Object.hash(runtimeType, id, answer, name, description, header, text);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemModelImplCopyWith<_$ItemModelImpl> get copyWith =>
@@ -183,7 +240,9 @@ abstract class _ItemModel implements ItemModel {
       {final int? id,
       final String? answer,
       final String? name,
-      final String? description}) = _$ItemModelImpl;
+      final String? description,
+      final String? header,
+      final String? text}) = _$ItemModelImpl;
 
   factory _ItemModel.fromJson(Map<String, dynamic> json) =
       _$ItemModelImpl.fromJson;
@@ -197,7 +256,14 @@ abstract class _ItemModel implements ItemModel {
   @override
   String? get description;
   @override
-  @JsonKey(ignore: true)
+  String? get header;
+  @override
+  String? get text;
+
+  /// Create a copy of ItemModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ItemModelImplCopyWith<_$ItemModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

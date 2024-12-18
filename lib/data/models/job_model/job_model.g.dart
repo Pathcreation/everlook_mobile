@@ -32,6 +32,9 @@ _$JobModelImpl _$$JobModelImplFromJson(Map<String, dynamic> json) =>
       endDate: json['end_date'] == null
           ? null
           : DateTime.parse(json['end_date'] as String),
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$JobModelImplToJson(_$JobModelImpl instance) =>
@@ -52,4 +55,5 @@ Map<String, dynamic> _$$JobModelImplToJson(_$JobModelImpl instance) =>
       'status': instance.status,
       'start_date': instance.startDate?.toIso8601String(),
       'end_date': instance.endDate?.toIso8601String(),
+      'images': instance.images,
     };

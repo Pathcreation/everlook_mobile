@@ -44,30 +44,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final ThemeData theme = Theme.of(context);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        // systemNavigationBarColor: const Color(0xFF262628),
-        systemNavigationBarColor: Colors.transparent,
-        statusBarColor: Colors.transparent,
-        // statusBarColor: backgroundColor,
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: AppColors.background,
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
       ),
     );
     return AppBar(
       titleSpacing: titleSpacing,
-      backgroundColor: backgroundColor ?? theme.colorScheme.onSecondary,
-      leadingWidth: showBackButton ? 40 : 0,
+      backgroundColor: backgroundColor ?? theme.colorScheme.inversePrimary,
+      leadingWidth: showBackButton ? 60 : 0,
       leading: showBackButton
           ? IconButton(
               onPressed: () {
                 if (onBack != null) {
                   onBack!();
                 } else {
-                  context.router.popAndPush(const MainRoute());
+                  context.router.popAndPush(const OffersRoute());
                 }
               },
               icon: SvgPicture.asset(
                 Assets.icons.arrowBack,
                 height: 16,
+                color: Colors.black,
+                width: 17,
               ),
             )
           : const SizedBox(),

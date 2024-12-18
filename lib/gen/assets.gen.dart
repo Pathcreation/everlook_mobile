@@ -284,6 +284,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/lang-icon.svg
   String get langIcon => 'assets/icons/lang-icon.svg';
 
+  /// File path: assets/icons/license_verification.svg
+  String get licenseVerification => 'assets/icons/license_verification.svg';
+
   /// File path: assets/icons/logout-icon.svg
   String get logoutIcon => 'assets/icons/logout-icon.svg';
 
@@ -435,6 +438,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/star-yellow-icon.svg
   String get starYellowIcon => 'assets/icons/star-yellow-icon.svg';
 
+  /// File path: assets/icons/sticker.svg
+  String get sticker => 'assets/icons/sticker.svg';
+
   /// File path: assets/icons/support-gray-icon.svg
   String get supportGrayIcon => 'assets/icons/support-gray-icon.svg';
 
@@ -545,6 +551,7 @@ class $AssetsIconsGen {
         instagramLogo,
         jobs,
         langIcon,
+        licenseVerification,
         logoutIcon,
         longArrowIcon,
         lupeBlueIcon,
@@ -595,6 +602,7 @@ class $AssetsIconsGen {
         starBlueIcon,
         starIcon,
         starYellowIcon,
+        sticker,
         supportGrayIcon,
         support,
         testSvg,

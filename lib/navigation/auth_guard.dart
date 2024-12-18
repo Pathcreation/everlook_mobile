@@ -8,26 +8,31 @@ class AuthGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     bool authenticated = false;
-    const _secureStorage = FlutterSecureStorage(
-      aOptions: AndroidOptions(
-        encryptedSharedPreferences: true,
-      ),
-    );
-    final value = await _secureStorage.read(key: TokensStorageKeys.authToken.keyName);
-    if (value != null) {
-      String? token = jsonDecode(value)["token"];
-      authenticated = token != null && token.isNotEmpty;
-    }
-    if (authenticated) {
-      resolver.next(true);
-    } else {
-      router.navigate(
-        AuthRoute(
-          onResult: (success) {
-            resolver.next(success);
-          },
+    try {
+      const _secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+          encryptedSharedPreferences: true,
         ),
       );
+      final value = await _secureStorage.read(key: TokensStorageKeys.authToken.keyName);
+      if (value != null) {
+        String? token = jsonDecode(value)["token"];
+        authenticated = token != null && token.isNotEmpty;
+      }
+      if (authenticated) {
+        resolver.next(true);
+      } else {
+        resolver.next(false);
+        router.push(
+          AuthRoute(
+            onResult: (success) {
+              resolver.next(success);
+            },
+          ),
+        );
+      }
+    } catch (ex) {
+      print(ex);
     }
   }
 }

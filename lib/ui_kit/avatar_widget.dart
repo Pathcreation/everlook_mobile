@@ -1,10 +1,10 @@
 import 'package:everlook_mobile/source/imports.dart';
-import 'package:everlook_mobile/source/localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppAvatar extends StatelessWidget {
   const AppAvatar({
     Key? key,
-    required this.imageId,
+    required this.user,
     this.size = 38,
     this.onTap,
     this.errorWidget,
@@ -13,7 +13,7 @@ class AppAvatar extends StatelessWidget {
     this.isEdit = false,
   }) : super(key: key);
 
-  final String imageId;
+  final UserModel? user;
   final double size;
   final Function()? onTap;
   final Widget? errorWidget;
@@ -23,7 +23,7 @@ class AppAvatar extends StatelessWidget {
 
   static void showAvatar({
     required BuildContext context,
-    required String? imageId,
+    required String imageId,
   }) {
     showDialog(
       barrierDismissible: false,
@@ -35,9 +35,7 @@ class AppAvatar extends StatelessWidget {
           alignment: Alignment.topRight,
           children: [
             CachedNetworkImage(
-              imageUrl: "$baseUrl$clientService"
-                  "?id=$imageId"
-                  "&quality=1",
+              imageUrl: imageId,
               imageBuilder: (context, imageProvider) => Container(
                 height: size.height,
                 width: size.width,
@@ -78,7 +76,7 @@ class AppAvatar extends StatelessWidget {
 
   static void showPreviewAvatar({
     required BuildContext context,
-    required String? imageId,
+    required String imageId,
     required Function() onTap,
     String? tag,
   }) {
@@ -97,9 +95,7 @@ class AppAvatar extends StatelessWidget {
                 child: Hero(
                   tag: tag ?? '',
                   child: CachedNetworkImage(
-                    imageUrl: "$baseUrl$clientService"
-                        "?id=$imageId"
-                        "&quality=0.5",
+                    imageUrl: "${dotenv.env['BASE_URL_DEV'] ?? baseUrl}$imageId",
                     imageBuilder: (context, imageProvider) => Container(
                       height: size.width * 0.7,
                       width: size.width * 0.7,
@@ -129,6 +125,7 @@ class AppAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appScope = context.read<IAppScope>();
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
@@ -150,11 +147,9 @@ class AppAvatar extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                imageId.isNotEmpty
+                user?.avatar != null
                     ? CachedNetworkImage(
-                        imageUrl: "$baseUrl$clientService"
-                            "?id=$imageId"
-                            "&quality=${quality ?? '0.5'}",
+                        imageUrl: '${appScope.appConfig.host}${user!.avatar!}',
                         errorListener: (errors) {
                           debugPrint(errors.toString());
                         },
@@ -201,11 +196,20 @@ class AppAvatar extends StatelessWidget {
                     : errorWidget ??
                         CircleAvatar(
                           radius: size,
-                          backgroundColor: theme.colorScheme.secondary,
+                          backgroundColor: avatarColors[Random().nextInt(7)],
                           child: Center(
-                            child: Icon(
-                              Icons.photo_camera_rounded,
-                              size: size / 2,
+                            child: Text(
+                              user?.name != null
+                                  ? user!.name![0]
+                                  : user?.email != null
+                                      ? user!.email![0]
+                                      : 'You\nphoto',
+                              style: theme.textTheme.bodySmall!.copyWith(
+                                color: Colors.white,
+                                fontSize: user?.name == null && user?.name == null ? 16 : size / 2,
+                                height: 1,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

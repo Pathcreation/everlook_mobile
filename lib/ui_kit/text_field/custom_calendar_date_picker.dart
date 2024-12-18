@@ -363,7 +363,7 @@ class _DatePickerModeToggleButtonState
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Color controlColor = theme.colorScheme.onSurface;
+    final Color controlColor = theme.colorScheme.secondary;
 
     return Container(
       padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
@@ -747,7 +747,7 @@ class _MonthPickerState extends State<_MonthPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final Color controlColor = AppColors.white.withOpacity(0.60);
+    final Color controlColor = AppColors.background.withOpacity(0.60);
 
     return Semantics(
       child: Column(
@@ -938,9 +938,9 @@ class _DayPickerState extends State<_DayPicker> {
       result.add(ExcludeSemantics(
         child: Center(
             child: Text(weekday,
-                style: headerStyle?.copyWith(color: AppColors.white) ??
+                style: headerStyle?.copyWith(color: AppColors.background) ??
                     const TextStyle(
-                      color: AppColors.white,
+                      color: AppColors.background,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ))),
@@ -1010,7 +1010,7 @@ class _DayPickerState extends State<_DayPicker> {
           if (isSelectedDay) MaterialState.selected,
         };
 
-        const Color dayForegroundColor = AppColors.white;
+        const Color dayForegroundColor = AppColors.background;
         final Color? dayBackgroundColor = resolve<Color?>(
             (DatePickerThemeData? theme) => isToday
                 ? theme?.todayBackgroundColor

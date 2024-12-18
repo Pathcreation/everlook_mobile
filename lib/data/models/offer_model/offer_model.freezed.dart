@@ -26,8 +26,12 @@ mixin _$OfferModel {
   int? get jobId => throw _privateConstructorUsedError;
   List<MessageModel>? get messages => throw _privateConstructorUsedError;
 
+  /// Serializes this OfferModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OfferModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OfferModelCopyWith<OfferModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$OfferModelCopyWithImpl<$Res, $Val extends OfferModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OfferModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$OfferModelImplCopyWithImpl<$Res>
       _$OfferModelImpl _value, $Res Function(_$OfferModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OfferModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,12 +175,14 @@ class _$OfferModelImpl implements _OfferModel {
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, chatId, jobId,
       const DeepCollectionEquality().hash(_messages));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OfferModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OfferModelImplCopyWith<_$OfferModelImpl> get copyWith =>
@@ -203,8 +213,11 @@ abstract class _OfferModel implements OfferModel {
   int? get jobId;
   @override
   List<MessageModel>? get messages;
+
+  /// Create a copy of OfferModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OfferModelImplCopyWith<_$OfferModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

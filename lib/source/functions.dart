@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:everlook_mobile/source/extensions.dart';
+import 'package:image_picker/image_picker.dart' as picker;
 import 'package:intl/intl.dart' as intl;
 import 'package:everlook_mobile/source/imports.dart';
 
@@ -37,7 +38,15 @@ void showMessage({
   required String message,
   required PageState type,
 }) {
-
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 1,
+    backgroundColor: getMessageColor(type),
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }
 
 void showMessageDialog({
@@ -54,11 +63,11 @@ void showMessageDialog({
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.background,
           title: Text(
             message,
             textAlign: TextAlign.center,
-            style:  TextStyle(
+            style: TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w400,
               fontSize: 14.0,
@@ -114,7 +123,6 @@ String getMessageHexColor(PageState type) {
   }
 }
 
-
 String diffTime({
   required BuildContext context,
   required DateTime date,
@@ -157,8 +165,7 @@ String getTime(int seconds) {
   int minutes = ((seconds % 3600) ~/ 60);
   int sec = seconds % 60;
 
-  String time =
-      '${days.toString().padLeft(2, '0') == '00' ? '' : '${days.toString().padLeft(2, '0')}:'}'
+  String time = '${days.toString().padLeft(2, '0') == '00' ? '' : '${days.toString().padLeft(2, '0')}:'}'
       '${hours.toString().padLeft(2, '0') == '00' ? '' : '${hours.toString().padLeft(2, '0')}:'}'
       '${minutes.toString().padLeft(2, '0')}:'
       '${sec.toString().padLeft(2, '0') == '00' ? '' : sec.toString().padLeft(2, '0')}';
@@ -175,7 +182,7 @@ void appLoadingDialog(BuildContext context) {
           height: 100,
           width: 100,
           decoration: BoxDecoration(
-            color: AppColors.white.withOpacity(0.2),
+            color: AppColors.background.withOpacity(0.2),
             borderRadius: BorderRadius.circular(24),
           ),
           child: const Center(
@@ -188,10 +195,7 @@ void appLoadingDialog(BuildContext context) {
 }
 
 Future<bool> promptPermissionSetting() async {
-  if (Platform.isIOS &&
-          await Permission.mediaLibrary.request().isGranted &&
-          await Permission.photos.request().isGranted ||
-      Platform.isAndroid && await Permission.photos.request().isGranted) {
+  if (Platform.isIOS && await Permission.mediaLibrary.request().isGranted && await Permission.photos.request().isGranted || Platform.isAndroid && await Permission.photos.request().isGranted) {
     return true;
   }
   return false;
@@ -201,9 +205,7 @@ Future<bool> storagePermission() async {
   final DeviceInfoPlugin info = DeviceInfoPlugin(); // import 'package:device_info_plus/device_info_plus.dart';
   final AndroidDeviceInfo androidInfo = await info.androidInfo;
   debugPrint('releaseVersion : ${androidInfo.version.release}');
-  final int androidVersion = int.parse(androidInfo.version.release.contains('.')
-      ? androidInfo.version.release[0]
-      : androidInfo.version.release);
+  final int androidVersion = int.parse(androidInfo.version.release.contains('.') ? androidInfo.version.release[0] : androidInfo.version.release);
   bool havePermission = false;
 
   if (androidVersion >= 13) {
@@ -213,8 +215,7 @@ Future<bool> storagePermission() async {
       //..... as needed
     ].request(); //import 'package:permission_handler/permission_handler.dart';
 
-    havePermission =
-        request.values.every((status) => status == PermissionStatus.granted);
+    havePermission = request.values.every((status) => status == PermissionStatus.granted);
   } else {
     final status = await Permission.storage.request();
     havePermission = status.isGranted;
@@ -251,8 +252,7 @@ int textWidth(
 }
 
 String? validatePassword(String value) {
-  RegExp regex =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   if (value.isEmpty) {
     return 'Пожалуйста укажите пароль';
   } else {
@@ -306,8 +306,7 @@ String formatDouble(double number) {
     int exponent = int.parse(parts[1]);
 
     /// Формируем строку с нужным количеством нулей после запятой
-    intl.NumberFormat formatter =
-        intl.NumberFormat("0.${"#" * (-exponent)}", 'en_US');
+    intl.NumberFormat formatter = intl.NumberFormat("0.${"#" * (-exponent)}", 'en_US');
     return formatter.format(mantissa * pow(10, exponent));
   } else {
     /// Если число не в научной нотации, просто возвращаем его строковое представление
@@ -323,11 +322,7 @@ Future<void> tryCatcher(Function() data, Function(String) errorCallback) async {
   try {
     await data();
   } on DioException catch (ex) {
-    String error = (ex.response?.data.runtimeType == String
-                ? jsonDecode(ex.response?.data)
-                : (ex.response?.data as Map))?['message']
-            .toString() ??
-        '';
+    String error = (ex.response?.data.runtimeType == String ? jsonDecode(ex.response?.data) : (ex.response?.data as Map))?['message'].toString() ?? '';
     errorCallback(error);
   } catch (ex) {
     errorCallback(ex.toString());
@@ -336,10 +331,10 @@ Future<void> tryCatcher(Function() data, Function(String) errorCallback) async {
 
 // Функция для определения длины текста в пикселях на dart
 int getTextWidth(
-    String text,
-    TextStyle style,
-    BuildContext context,
-    ) {
+  String text,
+  TextStyle style,
+  BuildContext context,
+) {
   final MediaQueryData data = MediaQuery.of(context);
   // Создаем текстовый виджет для расчета ширины текста
   final textSpan = TextSpan(
@@ -359,4 +354,24 @@ int getTextWidth(
 
   // Возвращаем ширину текста в пикселях
   return (textPainter.width + text.length * 1.2).toInt();
+}
+
+/// Function get image device
+Future<List<picker.XFile>> getImages() async {
+  final images = await picker.ImagePicker().pickMultiImage();
+  return images;
+}
+
+Future<picker.XFile?> getImage() async {
+  final image = await picker.ImagePicker().pickImage(
+    source: picker.ImageSource.gallery,
+  );
+  return image;
+}
+
+Future<picker.XFile?> getVideo() async {
+  final video = await picker.ImagePicker().pickVideo(
+    source: picker.ImageSource.gallery,
+  );
+  return video;
 }

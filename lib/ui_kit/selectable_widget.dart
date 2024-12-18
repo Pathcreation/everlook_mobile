@@ -30,22 +30,24 @@ class SelectableWidget extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        height: 34,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            width: 1,
-            color: theme.colorScheme.secondary,
-          ),
+          borderRadius: BorderRadius.circular(18),
+          color: theme.colorScheme.onPrimary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               data?.name ?? 'Select value',
-              style: theme.textTheme.headlineMedium!.copyWith(
-                color: data != null ? theme.colorScheme.tertiary : theme.colorScheme.secondary,
+              style: theme.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.normal,
+                color: data != null ? theme.colorScheme.primary : theme.colorScheme.secondary,
               ),
+            ),
+            const SizedBox(
+              width: 10,
             ),
             SvgPicture.asset(
               Assets.icons.arrowDownBlueIcon,
@@ -128,6 +130,23 @@ class _SelectableDialogState extends State<SelectableDialog> {
             ),
             const SizedBox(
               height: 14,
+              width: double.infinity,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: AppButton(
+                color: theme.colorScheme.primary,
+                title: 'Select type',
+                width: double.infinity,
+                textColor: theme.colorScheme.primary,
+                onPressed: () {
+                  setState(() {
+                    data = null;
+                  });
+                  widget.onPressed(data);
+                  Navigator.pop(context, true);
+                },
+              ),
             ),
             ...List.generate(
               widget.items.length,
@@ -135,13 +154,16 @@ class _SelectableDialogState extends State<SelectableDialog> {
                 return Padding(
                   padding: EdgeInsets.only(bottom: index != (widget.items.length - 1) ? 12 : 0),
                   child: AppButton(
+                    width: double.infinity,
                     color: data == widget.items[index] ? theme.colorScheme.primary : theme.colorScheme.primary.withOpacity(0.3),
                     title: widget.items[index].name ?? '',
+                    titlePadding: 0,
                     onPressed: () {
                       setState(() {
                         data = widget.items[index];
                       });
                       widget.onPressed(data);
+                      Navigator.pop(context, true);
                     },
                   ),
                 );

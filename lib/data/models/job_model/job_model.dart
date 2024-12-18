@@ -1,4 +1,3 @@
-import 'package:everlook_mobile/data/models/location_model/location_model.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -31,6 +30,7 @@ class JobModel with _$JobModel {
     DateTime? startDate,
     @JsonKey(name: "end_date")
     DateTime? endDate,
+    List<ImageModel>? images,
   }) = _JobModel;
 
   factory JobModel.fromJson(Map<String, dynamic> json) =>

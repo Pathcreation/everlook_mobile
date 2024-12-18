@@ -36,12 +36,20 @@ final class AuthModel extends BaseModel {
         await _appScope.profileRepository.getCurrentUser().then((user) async {
           if (user != null) {
             await _appScope.tokenStorage.read().then((tokens) async {
+              String? token;
+              if (tokens?.firebaseToken != null) {
+                token = tokens?.firebaseToken;
+              } else {
+                token = await FirebaseMessaging.instance.getToken();
+              }
+              print('FIREBASE_TOKEN: $token');
               await _appScope.profileRepository
                   .updateUser(user.copyWith(
                 deviceToken: tokens?.firebaseToken,
                 platform: Platform.isAndroid ? 'android' : 'ios',
               ))
-                  .then((_) {
+                  .then((_) async {
+                await _appScope.profileRepository.getLibraries();
                 _state.content(data);
               });
             });

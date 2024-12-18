@@ -55,7 +55,7 @@ class Format {
     },
   );
   static final timeFormat = MaskTextInputFormatter(
-    mask: '## : ##',
+    mask: '##:##',
     filter: {
       "#": RegExp(r'[0-9]'),
     },

@@ -11,6 +11,8 @@ class ItemModel with _$ItemModel {
     String? answer,
     String? name,
     String? description,
+    String? header,
+    String? text,
   }) = _ItemModel;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) =>

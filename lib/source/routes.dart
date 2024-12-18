@@ -5,7 +5,7 @@
 // class Pages {
 //   static const String auth = 'auth';
 //   static const String main = 'main';
-//   static const String profile = 'profile';
+//   static const String settings = 'settings';
 // }
 //
 // class AppRouter {
@@ -17,7 +17,7 @@
 //       GlobalKey<NavigatorState>(debugLabel: 'root');
 //
 //   String getInitialRoute() {
-//     String path = '/${Pages.profile}';
+//     String path = '/${Pages.settings}';
 //     final page = Preferences.getStringByKey('page');
 //     Preferences.removeKey('page');
 //     if (page != null) {
@@ -48,8 +48,8 @@
 //       ),
 //
 //       GoRoute(
-//         name: Pages.profile,
-//         path: '/${Pages.profile}',
+//         name: Pages.settings,
+//         path: '/${Pages.settings}',
 //         pageBuilder: (_, state) => _pageWrapper(
 //           state,
 //           child: const ProfileScreen(),
@@ -82,7 +82,7 @@
 //         return state.matchedLocation;
 //       }
 //       final tokens = await appScope.tokenStorage.read();
-//       if (state.fullPath == '/profile' && tokens?.accessToken == null) {
+//       if (state.fullPath == '/settings' && tokens?.accessToken == null) {
 //         return '/${Pages.auth}';
 //       }
 //       return null;

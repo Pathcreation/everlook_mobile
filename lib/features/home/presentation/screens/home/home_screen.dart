@@ -24,7 +24,7 @@ class HomeScreen extends ElementaryWidget<IHomeWM> {
         children: [
           AppButton(
             title: 'title',
-            icon: AssetIcons.offerIcon,
+            leftIcon: AssetIcons.offerIcon,
             onPressed: () {},
           ),
           const SizedBox(

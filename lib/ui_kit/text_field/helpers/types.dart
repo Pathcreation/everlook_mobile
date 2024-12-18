@@ -7,4 +7,5 @@ enum TextFieldType {
   date,
   password,
   doubleSaleChat,
+  time,
 }

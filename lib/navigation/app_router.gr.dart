@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const ActivitiesFlow()),
       );
     },
+    AppRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const AppFlow()),
+      );
+    },
     AuthRoute.name: (routeData) {
       final args = routeData.argsAs<AuthRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -44,12 +50,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const HomeFlow()),
       );
     },
-    MainRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MainFlow(),
-      );
-    },
     MenuRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -66,6 +66,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: WrappedRoute(child: const NewJobFlow()),
+      );
+    },
+    NotifyRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const NotifyFlow()),
       );
     },
     OfferRequestRoute.name: (routeData) {
@@ -123,6 +129,20 @@ class ActivitiesRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ActivitiesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AppFlow]
+class AppRoute extends PageRouteInfo<void> {
+  const AppRoute({List<PageRouteInfo>? children})
+      : super(
+          AppRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AppRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -193,20 +213,6 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MainFlow]
-class MainRoute extends PageRouteInfo<void> {
-  const MainRoute({List<PageRouteInfo>? children})
-      : super(
-          MainRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MainRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [MenuFlow]
 class MenuRoute extends PageRouteInfo<void> {
   const MenuRoute({List<PageRouteInfo>? children})
@@ -244,6 +250,20 @@ class NewJobRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'NewJobRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NotifyFlow]
+class NotifyRoute extends PageRouteInfo<void> {
+  const NotifyRoute({List<PageRouteInfo>? children})
+      : super(
+          NotifyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NotifyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

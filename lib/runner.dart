@@ -20,7 +20,7 @@ Future<void> _runApp(Environment env) async {
   const scopeRegister = AppScopeRegister();
   final scope = await scopeRegister.createScope(env);
 
-  runApp(AppFlow(appScope: scope));
+  runApp(AppMain(appScope: scope));
 }
 
 // ignore: unused_element

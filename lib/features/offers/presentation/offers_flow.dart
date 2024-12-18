@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:everlook_mobile/navigation/app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:everlook_mobile/common/widgets/di_scope.dart';
 import 'package:everlook_mobile/features/offers/data/repositories/offers_repository.dart';
@@ -16,7 +17,6 @@ class OffersFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     const repository = OffersRepository();
-
     return DiScope<IOffersScope>(
       factory: (context) => OffersScope(repository),
       onDispose: (scope) => scope.dispose(),
@@ -26,6 +26,8 @@ class OffersFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return const OffersScreen();
+    return const AppScaffold(
+      child: OffersScreen(),
+    );
   }
 }

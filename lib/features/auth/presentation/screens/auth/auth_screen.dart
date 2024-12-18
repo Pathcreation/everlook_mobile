@@ -19,7 +19,7 @@ class AuthScreen extends ElementaryWidget<IAuthWM> {
       unionStateListenable: wm.state,
       builder: (context, data) {
         if (data) {
-          context.pushRoute(const MainRoute());
+          context.pushRoute(const HomeRoute());
         }
         return SingleChildScrollView(
           child: Column(
@@ -51,118 +51,127 @@ class AuthScreen extends ElementaryWidget<IAuthWM> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    AppTextField(
-                      minHeight: 56,
-                      hintText: 'Email address',
-                      textController: wm.emailTextController,
-                      prefix: SvgPicture.asset(
-                        Assets.icons.email,
-                        width: 24,
+                child: Material(
+                  color: Colors.transparent,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 30,
                       ),
-                      prefixConstraints: const BoxConstraints(
-                        maxWidth: 48,
-                        minWidth: 48,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    AppTextField(
-                      minHeight: 56,
-                      labelText: 'Password',
-                      hintText: 'Password',
-                      textController: wm.passwordTextController,
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    AppButton(
-                      title: 'Sign In',
-                      onPressed: () async {
-                        await wm.login(
-                          email: wm.emailTextController.text,
-                          password: wm.passwordTextController.text,
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Password Recovery\n',
-                        style: wm.textScheme.bodyMedium!.copyWith(
-                          color: wm.colorScheme.primary,
+                      AppTextField(
+                        minHeight: 56,
+                        hintText: 'Email address',
+                        textController: wm.emailTextController,
+                        prefix: SvgPicture.asset(
+                          Assets.icons.email,
+                          width: 24,
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                        children: [
-                          TextSpan(
-                            text: 'New customer? ',
-                            style: wm.textScheme.bodyMedium!.copyWith(
-                              color: wm.colorScheme.tertiary,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'Create an Account',
-                            style: wm.textScheme.bodyMedium!.copyWith(
-                              color: wm.colorScheme.primary,
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    AppButton(
-                      textColor: wm.colorScheme.tertiary,
-                      color: wm.colorScheme.onSecondary,
-                      icon: Assets.icons.googleLogo,
-                      title: 'Continue with Google',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(
-                      height: 21,
-                    ),
-                    AppButton(
-                      textColor: wm.colorScheme.tertiary,
-                      color: wm.colorScheme.onSecondary,
-                      icon: Assets.icons.facebookLogo,
-                      title: 'Sign in with Facebook',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(
-                      height: 52,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Looking for leads?\n',
-                        style: wm.textScheme.bodyMedium!.copyWith(
-                          color: wm.colorScheme.tertiary,
+                        prefixConstraints: const BoxConstraints(
+                          maxWidth: 48,
+                          minWidth: 48,
                         ),
-                        children: [
-                          TextSpan(
-                            text: 'Create a Professional Account',
-                            style: wm.textScheme.bodyMedium!.copyWith(
-                              color: wm.colorScheme.primary,
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                          ),
-                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      AppTextField(
+                        minHeight: 56,
+                        labelText: 'Password',
+                        hintText: 'Password',
+                        textController: wm.passwordTextController,
+                        obscureText: true,
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      AppButton(
+                        title: 'Sign In',
+                        width: double.infinity,
+                        titlePadding: 0,
+                        onPressed: () async {
+                          await wm.login(
+                            email: wm.emailTextController.text,
+                            password: wm.passwordTextController.text,
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Password Recovery\n',
+                          style: wm.textScheme.bodyMedium!.copyWith(
+                            color: wm.colorScheme.primary,
+                          ),
+                          recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
+                          children: [
+                            TextSpan(
+                              text: 'New customer? ',
+                              style: wm.textScheme.bodyMedium!.copyWith(
+                                color: wm.colorScheme.tertiary,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'Create an Account',
+                              style: wm.textScheme.bodyMedium!.copyWith(
+                                color: wm.colorScheme.primary,
+                              ),
+                              recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      AppButton(
+                        textColor: wm.colorScheme.tertiary,
+                        color: wm.colorScheme.onSecondary,
+                        leftIcon: Assets.icons.googleLogo,
+                        title: 'Continue with Google',
+                        width: double.infinity,
+                        titlePadding: 0,
+                        onPressed: () {},
+                      ),
+                      const SizedBox(
+                        height: 21,
+                      ),
+                      AppButton(
+                        textColor: wm.colorScheme.tertiary,
+                        color: wm.colorScheme.onSecondary,
+                        leftIcon: Assets.icons.facebookLogo,
+                        title: 'Sign in with Facebook',
+                        width: double.infinity,
+                        titlePadding: 0,
+                        onPressed: () {},
+                      ),
+                      const SizedBox(
+                        height: 52,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Looking for leads?\n',
+                          style: wm.textScheme.bodyMedium!.copyWith(
+                            color: wm.colorScheme.tertiary,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'Create a Professional Account',
+                              style: wm.textScheme.bodyMedium!.copyWith(
+                                color: wm.colorScheme.primary,
+                              ),
+                              recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 60,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

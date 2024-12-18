@@ -35,7 +35,8 @@ class AppTextField extends StatefulWidget {
     this.obscureText,
     this.autofillHints,
     this.textInputAction,
-    this.minHeight = 45,
+    this.minHeight,
+    this.maxHeight,
     this.isLink = false,
     this.contentPadding,
     this.hintStyle,
@@ -74,7 +75,8 @@ class AppTextField extends StatefulWidget {
   final bool? obscureText;
   final List<String>? autofillHints;
   final TextInputAction? textInputAction;
-  final double minHeight;
+  final double? minHeight;
+  final double? maxHeight;
   final EdgeInsets? contentPadding;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
@@ -177,9 +179,10 @@ class _AppTextFieldState extends State<AppTextField> {
                   key: widget.formKey,
                   child: TextFormField(
                     enabled: true,
+                    expands: widget.maxHeight != null,
                     cursorColor: theme.colorScheme.primary,
                     enableIMEPersonalizedLearning: true,
-                    textAlignVertical: widget.prefix != null || widget.suffix != null ? TextAlignVertical.top : null,
+                    textAlignVertical: TextAlignVertical.top,
                     inputFormatters: [
                       if (widget.type == TextFieldType.name) Format.nameFormat,
                       if (_mask != null) _mask!,
@@ -188,12 +191,12 @@ class _AppTextFieldState extends State<AppTextField> {
                     ],
                     autofillHints: widget.autofillHints,
                     textInputAction: widget.textInputAction ?? (defaultTargetPlatform == TargetPlatform.iOS ? TextInputAction.done : TextInputAction.none),
-                    maxLines: widget.maxLines,
-                    minLines: 1,
+                    maxLines: widget.obscureText != null ? 1 : null,
+                    minLines: null,
                     textAlign: widget.textAlign ?? TextAlign.start,
                     controller: widget.textController,
                     focusNode: widget.focusNode,
-                    style: theme.textTheme.headlineMedium!.copyWith(
+                    style: theme.textTheme.bodyMedium!.copyWith(
                       color: isHashtag
                           ? null
                           : widget.isLink
@@ -224,8 +227,11 @@ class _AppTextFieldState extends State<AppTextField> {
                     },
                     textCapitalization: (widget.type == TextFieldType.name || widget.type == TextFieldType.text) ? TextCapitalization.sentences : TextCapitalization.none,
                     decoration: InputDecoration(
+                      constraints: BoxConstraints(
+                        maxHeight: widget.maxHeight ?? double.infinity,
+                      ),
                       contentPadding: widget.contentPadding,
-                      fillColor: widget.color ?? theme.colorScheme.surface,
+                      fillColor: widget.color ?? theme.colorScheme.inversePrimary,
                       filled: true,
                       errorStyle: const TextStyle(
                         fontSize: 0,
@@ -234,7 +240,10 @@ class _AppTextFieldState extends State<AppTextField> {
                       labelText: widget.labelText,
                       labelStyle: widget.labelStyle ?? theme.textTheme.bodySmall,
                       hintText: widget.hintText,
-                      hintStyle: widget.hintStyle ?? theme.textTheme.headlineMedium,
+                      hintStyle: widget.hintStyle ??
+                          theme.textTheme.bodyMedium!.copyWith(
+                            color: theme.colorScheme.tertiaryFixedDim,
+                          ),
                       isDense: widget.isDense,
                       hoverColor: Colors.transparent,
                       prefixIcon: widget.prefix,

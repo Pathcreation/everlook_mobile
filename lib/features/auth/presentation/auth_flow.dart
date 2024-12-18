@@ -1,3 +1,4 @@
+import 'package:everlook_mobile/common/widgets/di_scope.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/features/auth/di/auth_scope.dart';
 import 'package:everlook_mobile/features/auth/presentation/screens/auth/auth_screen.dart';

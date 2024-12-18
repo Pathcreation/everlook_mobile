@@ -65,6 +65,9 @@ class _$AppEventCopyWithImpl<$Res, $Val extends AppEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -81,6 +84,9 @@ class __$$InitialEventImplCopyWithImpl<$Res>
   __$$InitialEventImplCopyWithImpl(
       _$InitialEventImpl _value, $Res Function(_$InitialEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -232,6 +238,9 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -248,6 +257,9 @@ class __$$InitialAppStateImplCopyWithImpl<$Res>
   __$$InitialAppStateImplCopyWithImpl(
       _$InitialAppStateImpl _value, $Res Function(_$InitialAppStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -362,6 +374,9 @@ class __$$LoadingAppStateImplCopyWithImpl<$Res>
   __$$LoadingAppStateImplCopyWithImpl(
       _$LoadingAppStateImpl _value, $Res Function(_$LoadingAppStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -476,6 +491,9 @@ class __$$DataAppStateImplCopyWithImpl<$Res>
   __$$DataAppStateImplCopyWithImpl(
       _$DataAppStateImpl _value, $Res Function(_$DataAppStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -593,6 +611,8 @@ class __$$InfoAppStateImplCopyWithImpl<$Res>
       _$InfoAppStateImpl _value, $Res Function(_$InfoAppStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -640,7 +660,9 @@ class _$InfoAppStateImpl implements _InfoAppState {
   @override
   int get hashCode => Object.hash(runtimeType, message, pageState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InfoAppStateImplCopyWith<_$InfoAppStateImpl> get copyWith =>
@@ -728,7 +750,10 @@ abstract class _InfoAppState implements AppState {
 
   String get message;
   PageState get pageState;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InfoAppStateImplCopyWith<_$InfoAppStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

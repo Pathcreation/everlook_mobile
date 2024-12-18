@@ -1,3 +1,6 @@
+import 'package:everlook_mobile/config/environment/build_type.dart';
+import 'package:everlook_mobile/firebase_options.dart';
+import 'package:everlook_mobile/runner.dart';
 import 'package:everlook_mobile/source/endpoints.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/source/keys.dart';
@@ -22,7 +25,12 @@ class AppInterceptors {
         },
         onError: (e, handler) async {
           if (e.response?.statusCode == 401 || e.response?.statusCode == 403) {
-            await storage.delete();
+            await storage.delete().then((_) {
+              run(Environment(
+                buildType: BuildType.prod,
+                firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+              )).ignore();
+            });
           } else if (e.response?.statusCode == 404 && e.requestOptions.path.contains('refreshToken')) {
             await storage.delete();
           }

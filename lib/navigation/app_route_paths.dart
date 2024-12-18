@@ -10,5 +10,6 @@ abstract class AppRoutePaths {
   static const main = '/';
   static const auth = '/auth';
   static const home = 'home';
-  static const profile = 'profile';
+  static const menu = 'menu';
+  static const profile = 'settings';
 }

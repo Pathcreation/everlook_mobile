@@ -1,5 +1,4 @@
 import 'package:everlook_mobile/source/imports.dart';
-import 'package:everlook_mobile/styles/app_text_styles.dart';
 
 /// AppTheme
 abstract class AppTheme {
@@ -17,77 +16,84 @@ abstract class AppTheme {
           fontFamily: fontFamily,
           fontWeight: FontWeight.w700,
           fontSize: fontSizeCoef * 24.0,
-          color: AppColors.text,
+          color: AppColors.darkGrey,
         ),
         headlineMedium: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontWeight.normal,
-          fontSize: fontSizeCoef * 16.0,
-          color: AppColors.text,
+          fontWeight: FontWeight.w500,
+          fontSize: fontSizeCoef * 18.0,
+          color: AppColors.darkGrey,
+          height: 1.22,
         ),
         headlineSmall: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w300,
           fontSize: fontSizeCoef * 16.0,
-          color: AppColors.text,
+          color: AppColors.darkGrey,
         ),
         titleLarge: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w500,
           fontSize: fontSizeCoef * 16.0,
-          color: AppColors.text,
+          color: AppColors.darkGrey,
         ),
         titleMedium: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w400,
           fontSize: fontSizeCoef * 14.0,
-          color: AppColors.text,
+          color: AppColors.darkGrey,
         ),
         bodyLarge: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w400,
           fontSize: fontSizeCoef * 18,
-          color: AppColors.text,
+          color: AppColors.darkGrey,
         ),
         labelLarge: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w500,
-          fontSize: fontSizeCoef * 20.0,
-          color: AppColors.text,
+          fontSize: fontSizeCoef * 19,
+          color: AppColors.darkGrey,
         ),
         bodyMedium: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w400,
-          fontSize: fontSizeCoef * 14.0,
-          color: AppColors.text,
+          fontSize: fontSizeCoef * 15.0,
+          color: AppColors.darkGrey,
         ),
         labelMedium: TextStyle(
           fontFamily: fontFamily,
           fontWeight: FontWeight.w500,
-          fontSize: fontSizeCoef * 15.0,
-          color: AppColors.text,
+          fontSize: fontSizeCoef * 17.0,
+          color: AppColors.darkGrey,
         ),
         bodySmall: TextStyle(
           fontFamily: fontFamily,
-          fontWeight: FontWeight.w500,
-          fontSize: fontSizeCoef * 12.0,
-          color: AppColors.text,
+          fontWeight: FontWeight.normal,
+          fontSize: fontSizeCoef * 13.0,
+          color: AppColors.darkGrey,
         ),
       ),
-      scaffoldBackgroundColor: AppColors.white,
+      scaffoldBackgroundColor: AppColors.background,
       useMaterial3: true,
       splashColor: Colors.transparent,
-      canvasColor: AppColors.white,
+      canvasColor: AppColors.background,
       colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: AppColors.primary,
-        onPrimary: AppColors.secondary,
+        inversePrimary: AppColors.white,
+        primaryContainer: AppColors.primaryContainer,
+        onPrimary: AppColors.onPrimary,
         secondary: AppColors.secondary,
-        onSecondary: AppColors.lightGrey,
-        tertiary: AppColors.text,
+        onSecondary: AppColors.onSecondary,
+        secondaryContainer: AppColors.secondaryContainer,
+        tertiary: AppColors.darkGrey,
+        tertiaryContainer: AppColors.grey,
+        tertiaryFixed: AppColors.lightGrey,
+        tertiaryFixedDim: AppColors.ultraLightGrey,
         error: AppColors.error,
-        onError: AppColors.error,
-        surface: AppColors.white,
+        onError: AppColors.pink,
+        surface: AppColors.background,
         onSurface: AppColors.secondary,
         scrim: AppColors.yellow,
         outline: AppColors.green,
@@ -105,7 +111,7 @@ abstract class AppTheme {
 
       /// Divider theme
       dividerTheme: const DividerThemeData(
-        color: AppColors.secondary,
+        color: AppColors.ultraLightGrey,
         indent: 0,
         endIndent: 0,
         thickness: 1,
@@ -125,13 +131,30 @@ abstract class AppTheme {
       ),
 
       datePickerTheme: const DatePickerThemeData(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.background,
         todayBorder: BorderSide.none,
       ),
 
       // dropdownMenuTheme: DropdownMenuThemeData(
       //
       // ),
+
+      expansionTileTheme: ExpansionTileThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(
+            width: 1,
+            color: Colors.transparent,
+          ),
+        ),
+        collapsedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(
+            width: 1,
+            color: Colors.transparent,
+          ),
+        ),
+      ),
 
       /// InputDecoration theme
       inputDecorationTheme: InputDecorationTheme(
@@ -152,15 +175,15 @@ abstract class AppTheme {
         ),
         border: OutlineInputBorder(
           gapPadding: 10,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             width: 1,
-            color: AppColors.secondary,
+            color: AppColors.onSecondary,
           ),
         ),
         errorBorder: OutlineInputBorder(
           gapPadding: 10,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             width: 1,
             color: AppColors.error,
@@ -168,7 +191,7 @@ abstract class AppTheme {
         ),
         enabledBorder: OutlineInputBorder(
           gapPadding: 10,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             width: 1,
             color: AppColors.secondary,
@@ -176,7 +199,7 @@ abstract class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           gapPadding: 10,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             width: 1,
             color: AppColors.secondary,
@@ -184,7 +207,7 @@ abstract class AppTheme {
         ),
         focusedErrorBorder: OutlineInputBorder(
           gapPadding: 10,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             width: 1,
             color: AppColors.error,
@@ -195,9 +218,14 @@ abstract class AppTheme {
       /// TextButton theme
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.white,
+          foregroundColor: AppColors.background,
           backgroundColor: AppColors.primary,
-          textStyle: AppTextTheme.textTheme.bodyMedium,
+          textStyle: TextStyle(
+            fontFamily: fontFamily,
+            fontWeight: FontWeight.w500,
+            fontSize: fontSizeCoef * 15.0,
+            color: AppColors.darkGrey,
+          ),
         ),
       ),
 
@@ -213,7 +241,7 @@ abstract class AppTheme {
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
         //   style: const ButtonStyle().copyWith(
@@ -276,7 +304,7 @@ abstract class AppTheme {
       appBarTheme: const AppBarTheme(
         elevation: 0,
         backgroundColor: AppColors.lightGrey,
-        foregroundColor: AppColors.text,
+        foregroundColor: AppColors.darkGrey,
         scrolledUnderElevation: 0,
       ),
 
@@ -286,17 +314,92 @@ abstract class AppTheme {
         backgroundColor: AppColors.lightGrey.withOpacity(0.4),
         elevation: 0,
         type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: AppTextTheme.textTheme.labelMedium!.copyWith(
-          color: Colors.white,
-          fontSize: 9,
-        ),
-        unselectedLabelStyle: AppTextTheme.textTheme.labelMedium!.copyWith(
-          color: Colors.white,
+        selectedLabelStyle: TextStyle(
+          fontFamily: fontFamily,
           fontWeight: FontWeight.w500,
-          fontSize: 9,
+          fontSize: fontSizeCoef * 9.0,
+          color: AppColors.white,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: fontSizeCoef * 9.0,
+          color: AppColors.white,
         ),
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.secondary,
+      ),
+
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.primaryContainer,
+        foregroundColor: Colors.white,
+        iconSize: 30,
+        sizeConstraints: const BoxConstraints(
+          minWidth: 54,
+          maxWidth: 54,
+          minHeight: 54,
+          maxHeight: 54,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+      listTileTheme: ListTileThemeData(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 6,
+        ),
+        visualDensity: VisualDensity.compact,
+        titleTextStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: fontSizeCoef * 16.0,
+          color: AppColors.darkGrey,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+
+      /// Chip theme
+      chipTheme: ChipThemeData(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 0,
+        ),
+        labelPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 0,
+        ),
+        backgroundColor: AppColors.white,
+        disabledColor: AppColors.white,
+        selectedColor: AppColors.onPrimary,
+        checkmarkColor: AppColors.primary,
+        showCheckmark: false,
+        elevation: 0,
+        labelStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: fontSizeCoef * 15.0,
+          color: AppColors.darkGrey,
+        ),
+        secondaryLabelStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: fontSizeCoef * 15.0,
+          color: AppColors.darkGrey,
+        ),
+        side: const BorderSide(
+          width: 1,
+          color: Colors.transparent,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(
+            width: 1,
+            color: Colors.transparent,
+          ),
+        ),
       ),
 
       /// Card theme
@@ -307,17 +410,6 @@ abstract class AppTheme {
       //   shape: const RoundedRectangleBorder(
       //     borderRadius: AppTheme.circularRadius,
       //   ),
-      // ),
-
-      /// Chip theme
-      // chipTheme: ChipThemeData(
-      //   padding: const EdgeInsets.all(AppTheme.radius),
-      //   backgroundColor: AppColors.colorScheme.outline,
-      //   disabledColor: AppColors.colorScheme.surface,
-      //   selectedColor: AppColors.colorScheme.primary,
-      //   checkmarkColor: AppColors.colorScheme.onPrimary,
-      //   showCheckmark: false,
-      //   labelStyle: AppTextTheme.textTheme.labelLarge,
       // ),
 
       /// Checkbox theme

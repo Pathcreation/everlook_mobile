@@ -28,7 +28,7 @@ extension StringExtension on DateTime {
   }
 
   String get chatFormatDate {
-    String dateFormat = DateFormat("dd/MM/yyyy в HH:mm", 'ru').format(this);
+    String dateFormat = DateFormat("dd/MM/yyyy").format(this);
     return dateFormat;
   }
 

@@ -1,6 +1,9 @@
 import 'package:everlook_mobile/config/app_config.dart';
 import 'package:everlook_mobile/data/dio/dio_client.dart';
 import 'package:everlook_mobile/data/dio/interceptors.dart';
+import 'package:everlook_mobile/data/repositories/common_repository.dart';
+import 'package:everlook_mobile/data/repositories/jobs_repository.dart';
+import 'package:everlook_mobile/data/services/jobs_service/jobs_service.dart';
 import 'package:everlook_mobile/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/source/localizations.dart';
@@ -101,9 +104,23 @@ final class AppScopeRegister {
       tokenStorage: storage,
       localization: _localization,
       fontSizeCoef: 1,
+      jobsRepository: JobsRepository(
+        tokenStorage: storage,
+        service: JobsService(
+          dio,
+          baseUrl: appConfig.url,
+        ),
+      ),
       profileRepository: ProfileRepository(
         tokenStorage: storage,
         service: ProfileService(
+          dio,
+          baseUrl: appConfig.url,
+        ),
+      ),
+      commonRepository: CommonRepository(
+        tokenStorage: storage,
+        service: CommonService(
           dio,
           baseUrl: appConfig.url,
         ),
@@ -113,13 +130,17 @@ final class AppScopeRegister {
 
   AppConfig _createAppConfig(Environment env, SharedPreferences prefs) {
     if (env.isProd && kReleaseMode) {
-      return AppConfig(url: env.buildType.defaultUrl);
+      return AppConfig(
+        url: env.buildType.defaultUrl,
+        host: env.buildType.defaultHost,
+      );
     }
 
     final savedProxyUrl = _proxyUrl(prefs);
 
     return AppConfig(
       url: env.buildType.defaultUrl,
+      host: env.buildType.defaultHost,
       proxyUrl: savedProxyUrl,
     );
   }

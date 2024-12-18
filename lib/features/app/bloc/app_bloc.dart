@@ -31,7 +31,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       final tokens = await _appScope.tokenStorage.read();
       if (tokens != null && tokens.token != null) {
         if (tokens.firebaseToken != null) {
-          _appScope.profileRepository.getCurrentUser().then((value) {
+          _appScope.profileRepository.getCurrentUser().then((value) async {
             user = value;
             if (user != null) {
               _appScope.profileRepository.updateUser(
@@ -40,6 +40,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
                   platform: Platform.isAndroid ? 'android' : 'ios',
                 ),
               );
+              await _appScope.profileRepository.getLibraries();
+              await _appScope.jobsRepository.getActivities();
             }
           });
         }

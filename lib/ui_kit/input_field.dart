@@ -47,7 +47,7 @@ class InputField extends StatelessWidget {
                 TextSpan(
                   text: ' *',
                   style: theme.textTheme.headlineMedium!.copyWith(
-                    color: theme.colorScheme.onError,
+                    color: theme.colorScheme.error,
                   ),
                 ),
               ],

@@ -33,4 +33,9 @@ extension BuildTypeX on BuildType {
         BuildType.dev => Url.dev,
         BuildType.prod => Url.prod,
       };
+
+  String get defaultHost => switch (this) {
+        BuildType.dev => Url.devHost,
+        BuildType.prod => Url.prodHost,
+      };
 }

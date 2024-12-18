@@ -2,19 +2,18 @@ import 'package:everlook_mobile/common/utils/disposable_object/disposable_object
 import 'package:everlook_mobile/common/utils/disposable_object/i_disposable_object.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
-/// {@template profile_scope.class}
-/// Implementation of [IProfileScope].
+/// {@template settings_scope.class}
+/// Implementation of [ISettingsScope].
 /// {@endtemplate}
-final class ProfileScope extends DisposableObject implements IProfileScope {
+final class SettingsScope extends DisposableObject implements ISettingsScope {
   @override
   late final IAppScope appScope;
 
-  /// {@macro profile_scope.class}
-  ProfileScope(this.appScope);
+  /// {@macro settings_scope.class}
+  SettingsScope(this.appScope);
 }
 
-/// Scope dependencies of the Profile feature.
-abstract interface class IProfileScope implements IDisposableObject {
-  /// ProfileRepository.
+/// Scope dependencies of the Settings feature.
+abstract interface class ISettingsScope implements IDisposableObject {
   IAppScope get appScope;
 }

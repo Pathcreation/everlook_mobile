@@ -1,7 +1,6 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:everlook_mobile/navigation/app_scaffold.dart';
+import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/common/widgets/di_scope.dart';
-import 'package:everlook_mobile/features/activities/data/repositories/activities_repository.dart';
 import 'package:everlook_mobile/features/activities/di/activities_scope.dart';
 import 'package:everlook_mobile/features/activities/presentation/screens/activities/activities_screen.dart';
 
@@ -15,10 +14,10 @@ class ActivitiesFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    const repository = ActivitiesRepository();
+    final appScope = context.read<IAppScope>();
 
     return DiScope<IActivitiesScope>(
-      factory: (context) => ActivitiesScope(repository),
+      factory: (context) => ActivitiesScope(appScope),
       onDispose: (scope) => scope.dispose(),
       child: this,
     );
@@ -26,6 +25,8 @@ class ActivitiesFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return const ActivitiesScreen();
+    return const AppScaffold(
+      child: ActivitiesScreen(),
+    );
   }
 }

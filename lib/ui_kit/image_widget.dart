@@ -1,25 +1,25 @@
 import 'package:everlook_mobile/source/imports.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ImageWidget extends StatelessWidget {
   const ImageWidget({
     Key? key,
-    required this.imageId,
-    this.height = 96,
-    this.width = 96,
-    this.borderRadius = 8,
-    this.quality = 0.6,
+    required this.image,
+    this.height = 72,
+    this.width = 72,
+    this.borderRadius = 14,
     this.onTap,
   }) : super(key: key);
 
-  final String? imageId;
+  final String? image;
   final double height;
   final double width;
   final double borderRadius;
-  final double quality;
   final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         if (onTap != null) {
@@ -31,11 +31,10 @@ class ImageWidget extends StatelessWidget {
         height: height,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
-          child: imageId != null && imageId!.isNotEmpty
+          child: image != null && image!.isNotEmpty
               ? CachedNetworkImage(
-                  imageUrl: "$baseUrl$clientService"
-                      "?id=$imageId"
-                      "&quality=$quality",
+                  imageUrl: "${dotenv.env['BASE_URL_DEV'] ?? baseUrl}$image",
+                  // imageUrl: image!,
                   errorListener: (errors) {
                     debugPrint(errors.toString());
                   },
@@ -59,43 +58,36 @@ class ImageWidget extends StatelessWidget {
                       const SizedBox(
                     height: double.infinity,
                     width: double.infinity,
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicatorWidget(),
                   ),
                   errorWidget: (
                     context,
                     url,
                     error,
                   ) =>
-                      const SizedBox(
+                      Container(
                     height: double.infinity,
                     width: double.infinity,
-                    child: CircularProgressIndicator(),
+                    color: theme.colorScheme.secondaryFixedDim,
+                    child: const CircularProgressIndicatorWidget(),
                   ),
                 )
-              : const SizedBox(
+              : Container(
                   height: double.infinity,
                   width: double.infinity,
-                  child: CircularProgressIndicator(),
+                  color: theme.colorScheme.secondary.withOpacity(0.3),
+                  child: Center(
+                    child: SvgPicture.asset(
+                                          Assets.icons.cameraIcon,
+                                          height: 30,
+                                          color: theme.colorScheme.secondary.withOpacity(0.6),
+                                        ),
+                  ),
                 ),
         ),
       ),
     );
   }
-
   static ImageWidget of(BuildContext context) => ImageWidget.of(context);
 
-  /// Universal CircularProgressIndicator
-  Widget _loadingWidget({
-    required Color color,
-    required double avatarDiameter,
-  }) {
-    return SizedBox(
-      width: avatarDiameter,
-      height: avatarDiameter,
-      child: CircularProgressIndicator(
-        strokeWidth: 1,
-        color: color,
-      ),
-    );
-  }
 }

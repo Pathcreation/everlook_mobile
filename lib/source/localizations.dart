@@ -3,6 +3,7 @@ mixin AppLocale {
     "activities": "Activities",
     "addActivities": "Add Activities",
     "addPhotos": "Add Photos",
+    "address": "Address",
     "addVideo": "Add Video",
     "addAdditionalContentBlock": "Add additional content block",
     "addSomeMore": "Add some more?",
@@ -25,6 +26,7 @@ mixin AppLocale {
     "dispose": "Dispose",
     "editPhoto": "Edit photo",
     "emailAddress": 'Email address',
+    "email": 'Email',
     "emergencyResponseDisabled": "Emergency Response Disabled",
     "favorites": "Favorites",
     "filterSetup": "Filter Setup",
@@ -40,6 +42,7 @@ mixin AppLocale {
     "jobs": "Jobs",
     "lamps": "Lamps",
     "license": "License",
+    "licenseVerification": "License Verification",
     "lookingForLeads": "Looking for leads?",
     "makeFreeOffer": "Make Free Offer",
     "maxDistance": "Max Distance",
@@ -66,7 +69,7 @@ mixin AppLocale {
     "photo": "Photo",
     "placeYourJob": "Place Your Job",
     "powerSockets": "Power Sockets",
-    "profile": "Profile",
+    "settings": "Profile",
     "profileViewsPerMonth": "Profile Views per Month",
     "published": "Published",
     "rejected": "Rejected",
@@ -101,6 +104,8 @@ mixin AppLocale {
     "whatShouldBeDone": "What should be done?",
     "whatYouNeedToDo": "What you need to do?",
     "workAs": "Work as",
+    "workingTime": "Working Time",
+    "workingDays": "Working Days",
     "yes": "Yes",
     "km": "km",
   };
@@ -110,6 +115,8 @@ mixin AppLocale {
   static const String addActivities = "Add Activities";
 
   static const String addPhotos = "Add Photos";
+
+  static const String address = "Address";
 
   static const String addVideo = "Add Video";
 
@@ -151,6 +158,7 @@ mixin AppLocale {
   static const String dispose = "Dispose";
   static const String editPhoto = "Edit photo";
   static const String emailAddress = 'Email address';
+  static const String email = 'Email';
 
   static const String emergencyResponseDisabled = "Emergency Response Disabled";
 
@@ -180,7 +188,9 @@ mixin AppLocale {
 
   static const String lamps = "Lamps";
 
-  static const String license = "License";
+  static const String licenseNumber = "License Number";
+
+  static const String licenseVerification = "License Verification";
 
   static const String lookingForLeads = "Looking for leads?";
 
@@ -301,6 +311,10 @@ mixin AppLocale {
 
   static const String workAs = "Work as";
 
+  static const String workingDays = "Working Days";
+
+  static const String workingTime = "Working Time";
+
   static const String yes = "Yes";
 
   static const String km = "km";
@@ -309,6 +323,7 @@ mixin AppLocale {
     activities: "Activities",
     addActivities: "Add Activities",
     addPhotos: "Add Photos",
+    address: "Address",
     addVideo: "Add Video",
     addAdditionalContentBlock: "Add additional content block",
     addSomeMore: "Add some more?",
@@ -331,6 +346,7 @@ mixin AppLocale {
     dispose: "Dispose",
     editPhoto: "Edit photo",
     emailAddress: 'Email address',
+    email: 'Email',
     emergencyResponseDisabled: "Emergency Response Disabled",
     favorites: "Favorites",
     filterSetup: "Filter Setup",
@@ -345,7 +361,8 @@ mixin AppLocale {
     jobMessage: "Job Message",
     jobs: "Jobs",
     lamps: "Lamps",
-    license: "License",
+    licenseNumber: "License Number",
+    licenseVerification: "License Verification",
     lookingForLeads: "Looking for leads?",
     makeFreeOffer: "Make Free Offer",
     maxDistance: "Max Distance",
@@ -407,6 +424,8 @@ mixin AppLocale {
     whatShouldBeDone: "What should be done?",
     whatYouNeedToDo: "What you need to do?",
     workAs: "Work as",
+    workingTime: "Working Time",
+    workingDays: "Working Days",
     yes: "Yes",
     km: "km",
   };
@@ -414,6 +433,7 @@ mixin AppLocale {
     activities: "Активности",
     addActivities: "Добавить активности",
     addPhotos: "Добавить фотографии",
+    address: "Адерс",
     addVideo: "Добавить видео",
     addAdditionalContentBlock: "Добавить дополнительный блок контента",
     addSomeMore: "Добавить еще?",
@@ -436,6 +456,7 @@ mixin AppLocale {
     dispose: "Утилизировать",
     editPhoto: "Edit photo",
     emailAddress: "Электронная почта",
+    email: 'Email',
     emergencyResponseDisabled: "Экстренное реагирование отключено",
     favorites: "Избранное",
     filterSetup: "Настройка фильтра",
@@ -450,7 +471,8 @@ mixin AppLocale {
     jobMessage: "Сообщение по заданию",
     jobs: "Задания",
     lamps: "Лампы",
-    license: "Лицензия",
+    licenseNumber: "Номер лицензии",
+    licenseVerification: "Верификация лицензии",
     lookingForLeads: "Ищете лиды?",
     makeFreeOffer: "Сделать бесплатное предложение",
     maxDistance: "Максимальное расстояние",
@@ -512,6 +534,8 @@ mixin AppLocale {
     whatShouldBeDone: "Что должно быть сделано?",
     whatYouNeedToDo: "Что вам нужно сделать?",
     workAs: "Работать как",
+    workingTime: "Рабочее время",
+    workingDays: "Рабочие дни",
     yes: "Да",
     km: "км",
   };
@@ -519,6 +543,7 @@ mixin AppLocale {
     activities: "النشاطات",
     addActivities: "إضافة نشاطات",
     addPhotos: "إضافة صور",
+    address: "عنوان",
     addVideo: "إضافة فيديو",
     addAdditionalContentBlock: "إضافة كتلة محتوى إضافية",
     addSomeMore: "إضافة المزيد؟",
@@ -541,6 +566,7 @@ mixin AppLocale {
     dispose: "التخلص",
     editPhoto: "تعديل الصورة",
     emailAddress: "البريد الإلكتروني",
+    email: 'بريد إلكتروني',
     emergencyResponseDisabled: "الاستجابة للطوارئ معطلة",
     favorites: "المفضلة",
     filterSetup: "إعداد الفلتر",
@@ -555,7 +581,8 @@ mixin AppLocale {
     jobMessage: "رسالة العمل",
     jobs: "الوظائف",
     lamps: "مصابيح",
-    license: "رخصة",
+    licenseNumber: "رقم الترخيص",
+    licenseVerification: "التحقق من الترخيص",
     lookingForLeads: "تبحث عن عملاء محتملين؟",
     makeFreeOffer: "تقديم عرض مجاني",
     maxDistance: "أقصى مسافة",
@@ -617,6 +644,8 @@ mixin AppLocale {
     whatShouldBeDone: "ما الذي يجب فعله؟",
     whatYouNeedToDo: "ما الذي تحتاج إلى فعله؟",
     workAs: "العمل كـ",
+    workingTime: "وقت العمل",
+    workingDays: "أيام العمل",
     yes: "نعم",
     km: "كم"
   };

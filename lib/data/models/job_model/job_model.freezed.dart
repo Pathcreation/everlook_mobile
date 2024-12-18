@@ -42,9 +42,14 @@ mixin _$JobModel {
   DateTime? get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: "end_date")
   DateTime? get endDate => throw _privateConstructorUsedError;
+  List<ImageModel>? get images => throw _privateConstructorUsedError;
 
+  /// Serializes this JobModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $JobModelCopyWith<JobModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,7 +75,8 @@ abstract class $JobModelCopyWith<$Res> {
       String? description,
       String? status,
       @JsonKey(name: "start_date") DateTime? startDate,
-      @JsonKey(name: "end_date") DateTime? endDate});
+      @JsonKey(name: "end_date") DateTime? endDate,
+      List<ImageModel>? images});
 
   $UserModelCopyWith<$Res>? get user;
   $LocationModelCopyWith<$Res>? get location;
@@ -86,6 +92,8 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,6 +113,7 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
     Object? status = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? images = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -171,9 +180,15 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ImageModel>?,
     ) as $Val);
   }
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get user {
@@ -186,6 +201,8 @@ class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
     });
   }
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LocationModelCopyWith<$Res>? get location {
@@ -223,7 +240,8 @@ abstract class _$$JobModelImplCopyWith<$Res>
       String? description,
       String? status,
       @JsonKey(name: "start_date") DateTime? startDate,
-      @JsonKey(name: "end_date") DateTime? endDate});
+      @JsonKey(name: "end_date") DateTime? endDate,
+      List<ImageModel>? images});
 
   @override
   $UserModelCopyWith<$Res>? get user;
@@ -239,6 +257,8 @@ class __$$JobModelImplCopyWithImpl<$Res>
       _$JobModelImpl _value, $Res Function(_$JobModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -258,6 +278,7 @@ class __$$JobModelImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? images = freezed,
   }) {
     return _then(_$JobModelImpl(
       id: freezed == id
@@ -324,6 +345,10 @@ class __$$JobModelImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ImageModel>?,
     ));
   }
 }
@@ -347,7 +372,9 @@ class _$JobModelImpl implements _JobModel {
       this.description,
       this.status,
       @JsonKey(name: "start_date") this.startDate,
-      @JsonKey(name: "end_date") this.endDate});
+      @JsonKey(name: "end_date") this.endDate,
+      final List<ImageModel>? images})
+      : _images = images;
 
   factory _$JobModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobModelImplFromJson(json);
@@ -390,10 +417,19 @@ class _$JobModelImpl implements _JobModel {
   @override
   @JsonKey(name: "end_date")
   final DateTime? endDate;
+  final List<ImageModel>? _images;
+  @override
+  List<ImageModel>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'JobModel(id: $id, user: $user, contractor: $contractor, structure: $structure, title: $title, phone: $phone, allowCallsFrom: $allowCallsFrom, allowCallsTo: $allowCallsTo, nativeLanguage: $nativeLanguage, desiredPrice: $desiredPrice, address: $address, location: $location, description: $description, status: $status, startDate: $startDate, endDate: $endDate)';
+    return 'JobModel(id: $id, user: $user, contractor: $contractor, structure: $structure, title: $title, phone: $phone, allowCallsFrom: $allowCallsFrom, allowCallsTo: $allowCallsTo, nativeLanguage: $nativeLanguage, desiredPrice: $desiredPrice, address: $address, location: $location, description: $description, status: $status, startDate: $startDate, endDate: $endDate, images: $images)';
   }
 
   @override
@@ -425,10 +461,11 @@ class _$JobModelImpl implements _JobModel {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -447,9 +484,12 @@ class _$JobModelImpl implements _JobModel {
       description,
       status,
       startDate,
-      endDate);
+      endDate,
+      const DeepCollectionEquality().hash(_images));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$JobModelImplCopyWith<_$JobModelImpl> get copyWith =>
@@ -480,7 +520,8 @@ abstract class _JobModel implements JobModel {
       final String? description,
       final String? status,
       @JsonKey(name: "start_date") final DateTime? startDate,
-      @JsonKey(name: "end_date") final DateTime? endDate}) = _$JobModelImpl;
+      @JsonKey(name: "end_date") final DateTime? endDate,
+      final List<ImageModel>? images}) = _$JobModelImpl;
 
   factory _JobModel.fromJson(Map<String, dynamic> json) =
       _$JobModelImpl.fromJson;
@@ -524,7 +565,12 @@ abstract class _JobModel implements JobModel {
   @JsonKey(name: "end_date")
   DateTime? get endDate;
   @override
-  @JsonKey(ignore: true)
+  List<ImageModel>? get images;
+
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$JobModelImplCopyWith<_$JobModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

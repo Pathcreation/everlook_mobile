@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:everlook_mobile/navigation/app_router.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
-@RoutePage()
 class MainFlow extends StatefulWidget {
   const MainFlow({Key? key}) : super(key: key);
 
@@ -14,6 +13,7 @@ class _MainFlowState extends State<MainFlow> {
   Map<String, dynamic> map = {};
   String? token;
   UserModel? user;
+  int activeIndex = 0;
 
   @override
   void initState() {
@@ -115,185 +115,208 @@ class _MainFlowState extends State<MainFlow> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     getToken(context);
-    return AutoTabsRouter.pageView(
-      homeIndex: 2,
-      routes: const [
-        HomeRoute(),
-        HomeRoute(),
-        MenuRoute(),
-        ProfileRoute(),
-      ],
-      builder: (context, child, _) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return SafeArea(
-          top: true,
-          bottom: true,
-          child: Scaffold(
-            extendBody: true,
-            resizeToAvoidBottomInset: true,
-            body: child,
-            bottomNavigationBar: DecoratedBox(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.colorScheme.onBackground.withOpacity(0.15),
-                    // blurRadius: 30,
-                  )
-                ],
-              ),
-              child: ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 10.0,
-                    sigmaY: 10.0,
-                  ),
-                  child: BottomNavigationBar(
-                    currentIndex: tabsRouter.activeIndex,
-                    onTap: tabsRouter.setActiveIndex,
-                    type: BottomNavigationBarType.fixed,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: Stack(
-                            children: [
-                              SvgPicture.asset(
-                                Assets.icons.newJobBackground,
-                                color: theme.colorScheme.secondary,
-                              ),
-                              SvgPicture.asset(
-                                Assets.icons.newJobForeground,
-                              ),
-                            ],
-                          ),
-                        ),
-                        activeIcon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: Stack(
-                            children: [
-                              SvgPicture.asset(
-                                Assets.icons.newJobBackground,
-                                color: theme.colorScheme.primary,
-                              ),
-                              SvgPicture.asset(
-                                Assets.icons.newJobForeground,
-                              ),
-                            ],
-                          ),
-                        ),
-                        label: 'New Job',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: SvgPicture.asset(
-                            Assets.icons.offer,
-                            color: theme.colorScheme.secondary,
-                            height: 25,
-                            width: 25,
-                          ),
-                        ),
-                        activeIcon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: SvgPicture.asset(
-                            Assets.icons.offer,
-                            color: theme.colorScheme.primary,
-                            height: 25,
-                            width: 25,
-                          ),
-                        ),
-                        label: 'Offers',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 5,
-                              right: 5,
-                              left: 5,
-                            ),
-                            child: SvgPicture.asset(
-                              Assets.icons.notify,
-                              color: theme.colorScheme.secondary,
-                              height: 23,
-                              width: 22,
-                            ),
-                          ),
-                        ),
-                        activeIcon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 5,
-                              right: 5,
-                              left: 5,
-                            ),
-                            child: SvgPicture.asset(
-                              Assets.icons.notify,
-                              color: theme.colorScheme.primary,
-                              height: 23,
-                              width: 22,
-                            ),
-                          ),
-                        ),
-                        label: 'Notify',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: avatar(
-                            user: user,
-                            context: context,
-                          ),
-                        ),
-                        activeIcon: Padding(
-                          key: UniqueKey(),
-                          padding: const EdgeInsets.only(
-                            bottom: 5,
-                            top: 5,
-                          ),
-                          child: avatar(
-                            user: user,
-                            context: context,
-                          ),
-                        ),
-                        label: '',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+    context.router.addListener(() {
+      print('CURRENT_ROUTE: ${context.router.currentPath}');
+    });
+    return SafeArea(
+      top: true,
+      bottom: true,
+      child: Scaffold(
+        extendBody: true,
+        resizeToAvoidBottomInset: true,
+        body: AutoRouter(
+          builder: (ctx, widget) {
+            return widget;
+          },
+        ),
+        // floatingActionButton: context.router.currentPath == '/menu-route'
+        //     ? const SizedBox()
+        //     : FloatingActionButton(
+        //         child: SvgPicture.asset(
+        //           Assets.icons.burgerIcon,
+        //           color: theme.colorScheme.surface,
+        //           width: 20,
+        //         ),
+        //         onPressed: () {
+        //           context.router.push(const MenuRoute());
+        //         },
+        //       ),
+        // bottomNavigationBar: DecoratedBox(
+        //   decoration: BoxDecoration(
+        //     boxShadow: [
+        //       BoxShadow(
+        //         color: theme.colorScheme.onBackground.withOpacity(0.15),
+        //         // blurRadius: 30,
+        //       )
+        //     ],
+        //   ),
+        //   child: ClipRRect(
+        //     child: BackdropFilter(
+        //       filter: ImageFilter.blur(
+        //         sigmaX: 10.0,
+        //         sigmaY: 10.0,
+        //       ),
+        //       child: BottomNavigationBar(
+        //         currentIndex: activeIndex,
+        //         onTap: (index) {
+        //           setState(() {
+        //             activeIndex = index;
+        //           });
+        //           if (activeIndex == 0) {
+        //             context.router.push(const HomeRoute());
+        //           }
+        //           if (activeIndex == 1) {
+        //             context.router.push(const OffersRoute());
+        //           }
+        //           if (activeIndex == 2) {
+        //             context.router.push(const NotifyRoute());
+        //           }
+        //           if (activeIndex == 3) {
+        //             context.router.push(const MenuRoute());
+        //           }
+        //         },
+        //         type: BottomNavigationBarType.fixed,
+        //         items: [
+        //           BottomNavigationBarItem(
+        //             icon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: Stack(
+        //                 children: [
+        //                   SvgPicture.asset(
+        //                     Assets.icons.newJobBackground,
+        //                     color: theme.colorScheme.secondary,
+        //                   ),
+        //                   SvgPicture.asset(
+        //                     Assets.icons.newJobForeground,
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //             activeIcon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: Stack(
+        //                 children: [
+        //                   SvgPicture.asset(
+        //                     Assets.icons.newJobBackground,
+        //                     color: theme.colorScheme.primary,
+        //                   ),
+        //                   SvgPicture.asset(
+        //                     Assets.icons.newJobForeground,
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //             label: 'New Job',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: SvgPicture.asset(
+        //                 Assets.icons.offer,
+        //                 color: theme.colorScheme.secondary,
+        //                 height: 25,
+        //                 width: 25,
+        //               ),
+        //             ),
+        //             activeIcon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: SvgPicture.asset(
+        //                 Assets.icons.offer,
+        //                 color: theme.colorScheme.primary,
+        //                 height: 25,
+        //                 width: 25,
+        //               ),
+        //             ),
+        //             label: 'Offers',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //               ),
+        //               child: Padding(
+        //                 padding: const EdgeInsets.only(
+        //                   top: 5,
+        //                   right: 5,
+        //                   left: 5,
+        //                 ),
+        //                 child: SvgPicture.asset(
+        //                   Assets.icons.notify,
+        //                   color: theme.colorScheme.secondary,
+        //                   height: 23,
+        //                   width: 22,
+        //                 ),
+        //               ),
+        //             ),
+        //             activeIcon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //               ),
+        //               child: Padding(
+        //                 padding: const EdgeInsets.only(
+        //                   top: 5,
+        //                   right: 5,
+        //                   left: 5,
+        //                 ),
+        //                 child: SvgPicture.asset(
+        //                   Assets.icons.notify,
+        //                   color: theme.colorScheme.primary,
+        //                   height: 23,
+        //                   width: 22,
+        //                 ),
+        //               ),
+        //             ),
+        //             label: 'Notify',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: avatar(
+        //                 user: user,
+        //                 context: context,
+        //               ),
+        //             ),
+        //             activeIcon: Padding(
+        //               key: UniqueKey(),
+        //               padding: const EdgeInsets.only(
+        //                 bottom: 5,
+        //                 top: 5,
+        //               ),
+        //               child: avatar(
+        //                 user: user,
+        //                 context: context,
+        //               ),
+        //             ),
+        //             label: '',
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+      ),
     );
   }
 }

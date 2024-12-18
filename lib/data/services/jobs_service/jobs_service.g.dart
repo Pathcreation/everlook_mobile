@@ -6,7 +6,7 @@ part of 'jobs_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _JobsService implements JobsService {
   _JobsService(
@@ -34,7 +34,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//{jobId}',
+          '/jobs/{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -71,7 +71,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//{jobId}',
+          '/jobs/{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -104,7 +104,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/',
+          '/jobs',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -137,7 +137,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//{jobId}',
+          '/jobs/{jobId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -180,7 +180,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs/',
+          '/jobs',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -215,7 +215,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//${id}/reviews',
+          '/jobs/${id}/reviews',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -250,7 +250,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//${id}/images',
+          '/jobs/${id}/images',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -300,7 +300,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//images/upload',
+          '/jobs/images/upload',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -333,7 +333,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//images/${id}/delete/s/create}',
+          '/jobs/images/${id}/delete/s/create}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -374,7 +374,7 @@ class _JobsService implements JobsService {
     )
         .compose(
           _dio.options,
-          '/jobs//location',
+          '/jobs/location',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -388,6 +388,49 @@ class _JobsService implements JobsService {
     try {
       _value = _result.data!
           .map((dynamic i) => JobModel.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<ActivityModel>?> getActivities({
+    String? lang,
+    int? parent,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'lang': lang,
+      r'parent': parent,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<ActivityModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/structure/',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<ActivityModel>? _value;
+    try {
+      _value = _result.data
+          ?.map(
+              (dynamic i) => ActivityModel.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

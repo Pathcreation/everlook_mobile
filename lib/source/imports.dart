@@ -27,10 +27,13 @@ export 'package:adaptive_theme/adaptive_theme.dart';
 export 'package:auto_route/auto_route.dart';
 export 'package:union_state/union_state.dart';
 export 'package:flutter/gestures.dart';
+export 'package:get_it/get_it.dart';
+export 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+export 'package:easy_image_viewer/easy_image_viewer.dart';
+export 'package:fluttertoast/fluttertoast.dart';
 
 /// Project files
 export 'package:everlook_mobile/source/notifications_service.dart';
-export 'package:everlook_mobile/source/di_scope.dart';
 export 'package:nested/nested.dart';
 export 'package:everlook_mobile/data/persistence/storage/tokens_storage/auth_token_pair.dart';
 export 'package:everlook_mobile/data/persistence/storage/tokens_storage/token_storage_impl.dart';
@@ -44,7 +47,7 @@ export 'package:elementary/elementary.dart';
 export 'package:everlook_mobile/ui_kit/colors/app_color_scheme.dart';
 export 'package:everlook_mobile/ui_kit/text/app_text_scheme.dart';
 export 'package:everlook_mobile/config/environment/environment.dart';
-export 'package:everlook_mobile/features/app/app_flow.dart';
+export 'package:everlook_mobile/features/app/app_main.dart';
 export 'package:everlook_mobile/features/app/di/app_scope_register.dart';
 export 'package:everlook_mobile/features/activities/presentation/activities_flow.dart';
 export 'package:everlook_mobile/features/favorites/presentation/favorites_flow.dart';
@@ -54,7 +57,6 @@ export 'package:everlook_mobile/features/new_job/presentation/new_job_flow.dart'
 export 'package:everlook_mobile/features/offer_request/presentation/offer_request_flow.dart';
 export 'package:everlook_mobile/features/offers/presentation/offers_flow.dart';
 export 'package:everlook_mobile/features/menu/presentation/menu_flow.dart';
-export 'package:everlook_mobile/features/profile/presentation/profile_flow.dart';
 export 'package:everlook_mobile/features/rejected_offers/presentation/rejected_offers_flow.dart';
 export 'package:everlook_mobile/features/reviews/presentation/reviews_flow.dart';
 export 'package:everlook_mobile/features/settings/presentation/settings_flow.dart';
@@ -63,10 +65,32 @@ export 'package:everlook_mobile/navigation/app_route_paths.dart';
 export 'package:everlook_mobile/ui_kit/buttons/app_button.dart';
 export 'package:everlook_mobile/ui_kit/text_field/app_text_field.dart';
 export 'package:everlook_mobile/gen/assets.gen.dart';
+export 'package:everlook_mobile/ui_kit/flutter_switch.dart';
+export 'package:everlook_mobile/ui_kit/avatar_widget.dart';
+export 'package:everlook_mobile/source/localizations.dart';
+export 'package:everlook_mobile/ui_kit/distance_widget.dart';
+export 'package:everlook_mobile/ui_kit/language_widget.dart';
+export 'package:everlook_mobile/ui_kit/photo_count_widget.dart';
+export 'package:everlook_mobile/ui_kit/price_range_widget.dart';
+export 'package:everlook_mobile/ui_kit/rating_widget.dart';
+export 'package:everlook_mobile/ui_kit/status_widget.dart';
+export 'package:everlook_mobile/ui_kit/custom_appbar.dart';
+export 'package:everlook_mobile/ui_kit/selectable_widget.dart';
+export 'package:everlook_mobile/ui_kit/element_container.dart';
+export 'package:everlook_mobile/ui_kit/image_widget.dart';
+export 'package:everlook_mobile/ui_kit/circular_progress_indicator_widget.dart';
 
 /// Models
 export 'package:everlook_mobile/data/models/user_model/user_model.dart';
 export 'package:everlook_mobile/data/models/item_model/item_model.dart';
+export 'package:everlook_mobile/data/models/image_model/image_model.dart';
+export 'package:everlook_mobile/data/models/location_model/location_model.dart';
+export 'package:everlook_mobile/data/models/activity_model/activity_model.dart';
+export 'package:everlook_mobile/data/models/job_model/job_model.dart';
+export 'package:everlook_mobile/data/models/review_model/review_model.dart';
+export 'package:everlook_mobile/data/models/video_model/video_model.dart';
+export 'package:everlook_mobile/data/models/portfolio_model/portfolio_model.dart';
+export 'package:everlook_mobile/data/models/avatar_model/avatar_model.dart';
 
 /// Enum
 export 'package:everlook_mobile/source/enum.dart';
@@ -78,8 +102,10 @@ export 'package:everlook_mobile/source/custom_painters.dart';
 /// Repositories
 export 'package:everlook_mobile/data/i_repositories/i_profile_repository.dart';
 export 'package:everlook_mobile/data/repositories/profile_repository.dart';
+export 'package:everlook_mobile/data/i_repositories/i_jobs_repository.dart';
+export 'package:everlook_mobile/data/i_repositories/i_common_repository.dart';
 
 /// Services
 export 'package:everlook_mobile/data/services/profile_service/profile_service.dart';
-
-
+export 'package:everlook_mobile/data/services/jobs_service/jobs_service.dart';
+export 'package:everlook_mobile/data/services/common_service/common_service.dart';

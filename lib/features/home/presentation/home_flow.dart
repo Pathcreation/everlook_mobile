@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:everlook_mobile/navigation/app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:everlook_mobile/common/widgets/di_scope.dart';
 import 'package:everlook_mobile/features/home/data/repositories/home_repository.dart';
@@ -26,6 +27,8 @@ class HomeFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeScreen();
+    return const AppScaffold(
+      child: HomeScreen(),
+    );
   }
 }

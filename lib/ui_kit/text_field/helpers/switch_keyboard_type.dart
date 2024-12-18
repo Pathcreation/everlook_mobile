@@ -5,6 +5,7 @@ import 'types.dart';
 TextInputType switchInputType(TextFieldType fieldType) {
   switch (fieldType) {
     case TextFieldType.phoneNumber:
+      return TextInputType.phone;
     case TextFieldType.number:
       return defaultTargetPlatform == TargetPlatform.iOS
           ? const TextInputType.numberWithOptions(decimal: true)
