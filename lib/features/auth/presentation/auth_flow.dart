@@ -9,12 +9,7 @@ import 'package:everlook_mobile/features/auth/presentation/screens/auth/auth_scr
 @RoutePage()
 class AuthFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro auth_flow.class}
-  const AuthFlow({
-    super.key,
-    required this.onResult,
-  });
-
-  final Function(bool) onResult;
+  const AuthFlow({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -29,6 +24,8 @@ class AuthFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return const AuthScreen();
+    return const Scaffold(
+      body: AuthScreen(),
+    );
   }
 }

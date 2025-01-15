@@ -276,17 +276,4 @@ final class SettingsModel extends ElementaryModel {
       );
     });
   }
-
-  void changePassword() async {
-    if (_user.value.data?.email != null) {
-      await _appScope.profileRepository.recoveryPassword(email: _user.value.data!.email!).then((value) {
-        if (value) {
-          showMessage(
-            message: 'The code to change the password has been sent to the specified email address',
-            type: PageState.success,
-          );
-        }
-      });
-    }
-  }
 }

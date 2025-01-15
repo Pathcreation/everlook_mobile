@@ -1,6 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:everlook_mobile/resources/resources.dart';
 import 'package:everlook_mobile/source/custom_painters.dart';
+import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/ui_kit/buttons/app_button.dart';
 import 'package:everlook_mobile/ui_kit/buttons/custom_button.dart';
 import 'package:everlook_mobile/ui_kit/text_field/app_text_field.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends ElementaryWidget<IHomeWM> {
         children: [
           AppButton(
             title: 'title',
-            leftIcon: AssetIcons.offerIcon,
+            leftIcon: Assets.icons.offerIcon,
             onPressed: () {},
           ),
           const SizedBox(

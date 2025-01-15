@@ -214,8 +214,11 @@ class $AssetsIconsGen {
   /// File path: assets/icons/email.svg
   String get email => 'assets/icons/email.svg';
 
-  /// File path: assets/icons/eye-icon.svg
-  String get eyeIcon => 'assets/icons/eye-icon.svg';
+  /// File path: assets/icons/eye.svg
+  String get eye => 'assets/icons/eye.svg';
+
+  /// File path: assets/icons/eye_hide.svg
+  String get eyeHide => 'assets/icons/eye_hide.svg';
 
   /// File path: assets/icons/facebook-logo-big.svg
   String get facebookLogoBig => 'assets/icons/facebook-logo-big.svg';
@@ -528,7 +531,8 @@ class $AssetsIconsGen {
         documentIcon,
         downloadIcon,
         email,
-        eyeIcon,
+        eye,
+        eyeHide,
         facebookLogoBig,
         facebookLogo,
         favoritesBlueIcon,

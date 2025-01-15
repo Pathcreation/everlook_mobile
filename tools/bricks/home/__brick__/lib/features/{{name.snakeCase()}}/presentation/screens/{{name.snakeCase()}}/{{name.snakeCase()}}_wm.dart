@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 }
 
 /// Interface for [{{name.pascalCase()}}WM].
-abstract interface class I{{name.pascalCase()}}WM  implements IWidgetModel {}
+abstract interface class I{{name.pascalCase()}}WM with ThemeIModelMixin  implements IWidgetModel {}
 
 /// {@template {{name.snakeCase()}}_wm.class}
 /// [WidgetModel] for [{{name.pascalCase()}}Screen].

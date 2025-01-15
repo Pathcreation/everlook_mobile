@@ -23,13 +23,7 @@ class AuthGuard extends AutoRouteGuard {
         resolver.next(true);
       } else {
         resolver.next(false);
-        router.push(
-          AuthRoute(
-            onResult: (success) {
-              resolver.next(success);
-            },
-          ),
-        );
+        router.push(AuthRoute());
       }
     } catch (ex) {
       print(ex);

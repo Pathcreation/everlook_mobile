@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "282126799648",
-    "project_id": "everlook-8847a",
-    "storage_bucket": "everlook-8847a.firebasestorage.app"
+    "project_number": "1006641683911",
+    "project_id": "mapskeyforsite",
+    "storage_bucket": "mapskeyforsite.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:282126799648:android:ac362bc9168ca5f430fd45",
+        "mobilesdk_app_id": "1:1006641683911:android:3d6ee1c5201c59741e4de2",
         "android_client_info": {
           "package_name": "ae.everlook.everlook_mobile"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCYEo5ZMsyG4yRTxlUmHN76TqgCaSIWvj8"
+          "current_key": "AIzaSyCHqzwoqMritobKgcYiNDwSPJWlwJs-nLU"
         }
       ],
       "services": {

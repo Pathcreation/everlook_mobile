@@ -28,14 +28,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     AuthRoute.name: (routeData) {
-      final args = routeData.argsAs<AuthRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(
-            child: AuthFlow(
-          key: args.key,
-          onResult: args.onResult,
-        )),
+        child: WrappedRoute(child: const AuthFlow()),
       );
     },
     FavoritesRoute.name: (routeData) {
@@ -90,6 +85,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: WrappedRoute(child: const ProfileFlow()),
+      );
+    },
+    RecoveryPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const RecoveryPasswordFlow()),
       );
     },
     RejectedOffersRoute.name: (routeData) {
@@ -149,39 +150,16 @@ class AppRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AuthFlow]
-class AuthRoute extends PageRouteInfo<AuthRouteArgs> {
-  AuthRoute({
-    Key? key,
-    required dynamic Function(bool) onResult,
-    List<PageRouteInfo>? children,
-  }) : super(
+class AuthRoute extends PageRouteInfo<void> {
+  const AuthRoute({List<PageRouteInfo>? children})
+      : super(
           AuthRoute.name,
-          args: AuthRouteArgs(
-            key: key,
-            onResult: onResult,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'AuthRoute';
 
-  static const PageInfo<AuthRouteArgs> page = PageInfo<AuthRouteArgs>(name);
-}
-
-class AuthRouteArgs {
-  const AuthRouteArgs({
-    this.key,
-    required this.onResult,
-  });
-
-  final Key? key;
-
-  final dynamic Function(bool) onResult;
-
-  @override
-  String toString() {
-    return 'AuthRouteArgs{key: $key, onResult: $onResult}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -306,6 +284,20 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecoveryPasswordFlow]
+class RecoveryPasswordRoute extends PageRouteInfo<void> {
+  const RecoveryPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          RecoveryPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RecoveryPasswordRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

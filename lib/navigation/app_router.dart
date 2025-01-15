@@ -4,6 +4,7 @@ import 'package:everlook_mobile/features/auth/presentation/auth_flow.dart';
 import 'package:everlook_mobile/features/main_page.dart';
 import 'package:everlook_mobile/features/notify/presentation/notify_flow.dart';
 import 'package:everlook_mobile/features/profile/presentation/profile_flow.dart';
+import 'package:everlook_mobile/features/recovery_password/presentation/recovery_password_flow.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
 import 'app_route_paths.dart';
@@ -82,6 +83,10 @@ class AppRouter extends _$AppRouter {
             CustomRoute(
               barrierColor: Colors.white,
               page: SupportRoute.page,
+            ),
+            CustomRoute(
+              barrierColor: Colors.white,
+              page: RecoveryPasswordRoute.page,
             ),
           ],
         ),

@@ -11,6 +11,7 @@ mixin AppLocale {
     "additionalContentBlockHeader": "Additional content block header",
     "allowCalls": "Allow calls",
     "budget": "Budget",
+    "backToLogin": "Back to Login",
     "cancel": "Cancel",
     "canceled": "Canceled",
     "changePassword": "Change Password",
@@ -20,7 +21,7 @@ mixin AppLocale {
     "comment": "Comment",
     "continueWithGoogle": "Continue with Google",
     "createAProfessionalAccount": "Create a Professional Account",
-    "createAnAccount": "Create an Account",
+    "createAnAccount": "Create a Free Account",
     "currentActivities": "Current Activities",
     "days": "Days",
     "dispose": "Dispose",
@@ -130,6 +131,8 @@ mixin AppLocale {
 
   static const String allowCalls = "Allow calls";
 
+  static const String backToLogin = "Back to Login";
+
   static const String budget = "Budget";
 
   static const String cancel = "Cancel";
@@ -149,7 +152,7 @@ mixin AppLocale {
 
   static const String createAProfessionalAccount = "Create a Professional Account";
 
-  static const String createAnAccount = "Create an Account";
+  static const String createAnAccount = "Create a Free Account";
 
   static const String currentActivities = "Current Activities";
 
@@ -330,6 +333,7 @@ mixin AppLocale {
     additionalContentBlock: "Additional Content Block",
     additionalContentBlockHeader: "Additional content block header",
     allowCalls: "Allow calls",
+    backToLogin: "Back to Login",
     budget: "Budget",
     cancel: "Cancel",
     canceled: "Canceled",
@@ -340,7 +344,7 @@ mixin AppLocale {
     comment: "Comment",
     continueWithGoogle: "Continue with Google",
     createAProfessionalAccount: "Create a Professional Account",
-    createAnAccount: "Create an Account",
+    createAnAccount: "Create a Free Account",
     currentActivities: "Current Activities",
     days: "Days",
     dispose: "Dispose",
@@ -440,6 +444,7 @@ mixin AppLocale {
     additionalContentBlock: "Дополнительный блок контента",
     additionalContentBlockHeader: "Заголовок дополнительного блока контента",
     allowCalls: "Разрешить звонки",
+    backToLogin: "Вернуться к авторизации",
     budget: "Бюджет",
     cancel: "Отмена",
     canceled: "Отменено",
@@ -550,6 +555,7 @@ mixin AppLocale {
     additionalContentBlock: "كتلة محتوى إضافية",
     additionalContentBlockHeader: "عنوان كتلة المحتوى الإضافية",
     allowCalls: "السماح بالمكالمات",
+    backToLogin: "العودة إلى تسجيل الدخول",
     budget: "الميزانية",
     cancel: "إلغاء",
     canceled: "ملغى",

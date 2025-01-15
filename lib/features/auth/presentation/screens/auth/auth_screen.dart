@@ -1,3 +1,7 @@
+import 'package:everlook_mobile/features/auth/presentation/widgets/client_sign_in.dart';
+import 'package:everlook_mobile/features/auth/presentation/widgets/create_account_client.dart';
+import 'package:everlook_mobile/features/auth/presentation/widgets/create_account_pro.dart';
+import 'package:everlook_mobile/features/auth/presentation/widgets/pro_sign_in.dart';
 import 'package:everlook_mobile/navigation/app_router.dart';
 import 'package:everlook_mobile/source/imports.dart';
 
@@ -17,167 +21,6 @@ class AuthScreen extends ElementaryWidget<IAuthWM> {
   Widget build(IAuthWM wm) {
     return UnionStateListenableBuilder(
       unionStateListenable: wm.state,
-      builder: (context, data) {
-        if (data) {
-          context.pushRoute(const HomeRoute());
-        }
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 210,
-                width: double.infinity,
-                color: wm.colorScheme.tertiary,
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'EVERLOOK',
-                      style: wm.textScheme.headlineLarge!.copyWith(
-                        color: wm.colorScheme.surface,
-                      ),
-                    ),
-                    Text(
-                      'Client Sign In',
-                      style: wm.textScheme.bodyMedium!.copyWith(
-                        color: wm.colorScheme.surface,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Material(
-                  color: Colors.transparent,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      AppTextField(
-                        minHeight: 56,
-                        hintText: 'Email address',
-                        textController: wm.emailTextController,
-                        prefix: SvgPicture.asset(
-                          Assets.icons.email,
-                          width: 24,
-                        ),
-                        prefixConstraints: const BoxConstraints(
-                          maxWidth: 48,
-                          minWidth: 48,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      AppTextField(
-                        minHeight: 56,
-                        labelText: 'Password',
-                        hintText: 'Password',
-                        textController: wm.passwordTextController,
-                        obscureText: true,
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      AppButton(
-                        title: 'Sign In',
-                        width: double.infinity,
-                        titlePadding: 0,
-                        onPressed: () async {
-                          await wm.login(
-                            email: wm.emailTextController.text,
-                            password: wm.passwordTextController.text,
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Password Recovery\n',
-                          style: wm.textScheme.bodyMedium!.copyWith(
-                            color: wm.colorScheme.primary,
-                          ),
-                          recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                          children: [
-                            TextSpan(
-                              text: 'New customer? ',
-                              style: wm.textScheme.bodyMedium!.copyWith(
-                                color: wm.colorScheme.tertiary,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Create an Account',
-                              style: wm.textScheme.bodyMedium!.copyWith(
-                                color: wm.colorScheme.primary,
-                              ),
-                              recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      AppButton(
-                        textColor: wm.colorScheme.tertiary,
-                        color: wm.colorScheme.onSecondary,
-                        leftIcon: Assets.icons.googleLogo,
-                        title: 'Continue with Google',
-                        width: double.infinity,
-                        titlePadding: 0,
-                        onPressed: () {},
-                      ),
-                      const SizedBox(
-                        height: 21,
-                      ),
-                      AppButton(
-                        textColor: wm.colorScheme.tertiary,
-                        color: wm.colorScheme.onSecondary,
-                        leftIcon: Assets.icons.facebookLogo,
-                        title: 'Sign in with Facebook',
-                        width: double.infinity,
-                        titlePadding: 0,
-                        onPressed: () {},
-                      ),
-                      const SizedBox(
-                        height: 52,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Looking for leads?\n',
-                          style: wm.textScheme.bodyMedium!.copyWith(
-                            color: wm.colorScheme.tertiary,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'Create a Professional Account',
-                              style: wm.textScheme.bodyMedium!.copyWith(
-                                color: wm.colorScheme.primary,
-                              ),
-                              recognizer: TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 60,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
       loadingBuilder: (_, __) => const Padding(
         padding: EdgeInsets.all(30),
         child: Center(
@@ -190,6 +33,64 @@ class AuthScreen extends ElementaryWidget<IAuthWM> {
           ex.toString(),
         );
       },
+      builder: (context, data) {
+        if (data) {
+          context.pushRoute(const HomeRoute());
+        }
+        return Column(
+          children: [
+            Container(
+              height: 210,
+              width: double.infinity,
+              color: wm.colorScheme.tertiary,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'EVERLOOK',
+                    style: wm.textScheme.headlineLarge!.copyWith(
+                      color: wm.colorScheme.surface,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 4,
+                  vertical: 8,
+                ),
+                child: UnionStateListenableBuilder(
+                    unionStateListenable: wm.authState,
+                    loadingBuilder: (_, __) => const SizedBox(),
+                    failureBuilder: (_, ex, ___) => const SizedBox(),
+                    builder: (context, authState) {
+                      return authState.maybeMap(
+                        orElse: () => const SizedBox(),
+                        signInClient: () {
+                          return ClientSignIn(wm: wm);
+                        },
+                        signInPro: () {
+                          return ProSignIn(wm: wm);
+                        },
+                        createAccountClient: () {
+                          return CreateAccountClient(wm: wm);
+                        },
+                        createAccountPro: () {
+                          return CreateAccountPro(wm: wm);
+                        },
+                      );
+                    }),
+              ),
+            ),
+          ],
+        );
+      },
+
     );
   }
 }

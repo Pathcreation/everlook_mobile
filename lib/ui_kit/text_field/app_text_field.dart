@@ -171,121 +171,106 @@ class _AppTextFieldState extends State<AppTextField> {
                   ),
             ),
           if (widget.label != null) widget.label!,
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Form(
-                  key: widget.formKey,
-                  child: TextFormField(
-                    enabled: true,
-                    expands: widget.maxHeight != null,
-                    cursorColor: theme.colorScheme.primary,
-                    enableIMEPersonalizedLearning: true,
-                    textAlignVertical: TextAlignVertical.top,
-                    inputFormatters: [
-                      if (widget.type == TextFieldType.name) Format.nameFormat,
-                      if (_mask != null) _mask!,
-                      if (widget.textLength != null) LengthLimitingTextInputFormatter(widget.textLength!),
-                      if (widget.textInputFormatter != null) widget.textInputFormatter!,
-                    ],
-                    autofillHints: widget.autofillHints,
-                    textInputAction: widget.textInputAction ?? (defaultTargetPlatform == TargetPlatform.iOS ? TextInputAction.done : TextInputAction.none),
-                    maxLines: widget.obscureText != null ? 1 : null,
-                    minLines: null,
-                    textAlign: widget.textAlign ?? TextAlign.start,
-                    controller: widget.textController,
-                    focusNode: widget.focusNode,
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: isHashtag
-                          ? null
-                          : widget.isLink
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.tertiary,
-                      foreground: isHashtag ? paint : null,
+          Form(
+            key: widget.formKey,
+            child: TextFormField(
+              enabled: true,
+              expands: widget.maxHeight != null,
+              cursorColor: theme.colorScheme.primary,
+              enableIMEPersonalizedLearning: true,
+              textAlignVertical: TextAlignVertical.top,
+              inputFormatters: [
+                if (widget.type == TextFieldType.name) Format.nameFormat,
+                if (_mask != null) _mask!,
+                if (widget.textLength != null) LengthLimitingTextInputFormatter(widget.textLength!),
+                if (widget.textInputFormatter != null) widget.textInputFormatter!,
+              ],
+              autofillHints: widget.autofillHints,
+              textInputAction: widget.textInputAction ?? (defaultTargetPlatform == TargetPlatform.iOS ? TextInputAction.done : TextInputAction.none),
+              maxLines: widget.obscureText != null ? 1 : null,
+              minLines: null,
+              textAlign: widget.textAlign ?? TextAlign.start,
+              controller: widget.textController,
+              focusNode: widget.focusNode,
+              style: theme.textTheme.bodyMedium!.copyWith(
+                color: isHashtag
+                    ? null
+                    : widget.isLink
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.tertiary,
+                foreground: isHashtag ? paint : null,
+              ),
+              readOnly: !widget.readOnly,
+              autofocus: widget.enableFocus,
+              keyboardType: switchInputType(widget.type),
+              onEditingComplete: widget.onComplete,
+              obscureText: widget.obscureText ?? false,
+              onChanged: (text) {
+                setState(() {
+                  if (widget.onChange != null) {
+                    widget.onChange!(text);
+                  }
+                });
+              },
+              validator: (value) {
+                final error = switchValidation(
+                  context,
+                  widget.type,
+                  value!,
+                );
+                _errorText.add(error ?? '');
+                return error;
+              },
+              textCapitalization: (widget.type == TextFieldType.name || widget.type == TextFieldType.text) ? TextCapitalization.sentences : TextCapitalization.none,
+              decoration: InputDecoration(
+                constraints: BoxConstraints(
+                  maxHeight: widget.maxHeight ?? double.infinity,
+                ),
+                contentPadding: widget.contentPadding,
+                fillColor: widget.color ?? theme.colorScheme.inversePrimary,
+                filled: true,
+                alignLabelWithHint: false,
+                errorStyle: const TextStyle(
+                  fontSize: 0,
+                  height: 0,
+                ),
+                labelText: widget.labelText,
+                labelStyle: widget.labelStyle ?? theme.textTheme.bodySmall,
+                hintText: widget.hintText,
+                hintStyle: widget.hintStyle ??
+                    theme.textTheme.bodyMedium!.copyWith(
+                      color: theme.colorScheme.tertiaryFixedDim,
                     ),
-                    readOnly: !widget.readOnly,
-                    autofocus: widget.enableFocus,
-                    keyboardType: switchInputType(widget.type),
-                    onEditingComplete: widget.onComplete,
-                    obscureText: widget.obscureText ?? false,
-                    onChanged: (text) {
-                      setState(() {
-                        if (widget.onChange != null) {
-                          widget.onChange!(text);
-                        }
-                      });
-                    },
-                    validator: (value) {
-                      final error = switchValidation(
+                isDense: widget.isDense,
+                hoverColor: Colors.transparent,
+                prefixIcon: widget.prefix,
+                prefixIconConstraints: widget.prefixConstraints ??
+                    const BoxConstraints(
+                      maxHeight: 32,
+                      maxWidth: 32,
+                    ),
+                suffixText: widget.suffixText,
+                suffixIcon: widget.suffix,
+                suffixIconConstraints: widget.suffixConstraints ??
+                    BoxConstraints(
+                      maxHeight: 28,
+                      maxWidth: getTextWidth(
+                        widget.suffixText ?? '',
+                        theme.textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.w300,
+                        ),
                         context,
-                        widget.type,
-                        value!,
-                      );
-                      _errorText.add(error ?? '');
-                      return error;
-                    },
-                    textCapitalization: (widget.type == TextFieldType.name || widget.type == TextFieldType.text) ? TextCapitalization.sentences : TextCapitalization.none,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints(
-                        maxHeight: widget.maxHeight ?? double.infinity,
-                      ),
-                      contentPadding: widget.contentPadding,
-                      fillColor: widget.color ?? theme.colorScheme.inversePrimary,
-                      filled: true,
-                      errorStyle: const TextStyle(
-                        fontSize: 0,
-                        height: 0,
-                      ),
-                      labelText: widget.labelText,
-                      labelStyle: widget.labelStyle ?? theme.textTheme.bodySmall,
-                      hintText: widget.hintText,
-                      hintStyle: widget.hintStyle ??
-                          theme.textTheme.bodyMedium!.copyWith(
-                            color: theme.colorScheme.tertiaryFixedDim,
-                          ),
-                      isDense: widget.isDense,
-                      hoverColor: Colors.transparent,
-                      prefixIcon: widget.prefix,
-                      prefixIconConstraints: widget.prefixConstraints ??
-                          const BoxConstraints(
-                            maxHeight: 32,
-                            maxWidth: 32,
-                          ),
-                      suffixText: widget.suffixText,
-                      suffixIconConstraints: widget.suffixConstraints ??
-                          BoxConstraints(
-                            maxHeight: 28,
-                            maxWidth: getTextWidth(
-                              widget.suffixText ?? '',
-                              theme.textTheme.bodyLarge!.copyWith(
-                                fontWeight: FontWeight.w300,
-                              ),
-                              context,
-                            ).toDouble(),
-                          ),
-                      suffixStyle: theme.textTheme.bodyLarge!.copyWith(
-                        color: theme.colorScheme.secondary,
-                        fontWeight: FontWeight.w300,
-                      ),
+                      ).toDouble(),
                     ),
-                    onFieldSubmitted: (s) {
-                      FocusScope.of(context).unfocus();
-                    },
-                  ),
+                suffixStyle: theme.textTheme.bodyLarge!.copyWith(
+                  color: theme.colorScheme.secondary,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
-              if (widget.suffix != null)
-                Padding(
-                  padding: widget.paddingSuffix ??
-                      const EdgeInsets.only(
-                        left: 9,
-                        right: 8,
-                        top: 10,
-                      ),
-                  child: widget.suffix!,
-                ),
-            ],
+              onFieldSubmitted: (s) {
+                FocusScope.of(context).unfocus();
+              },
+            ),
           ),
           if (widget.subLabelText != null)
             Text(

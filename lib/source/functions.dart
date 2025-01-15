@@ -33,6 +33,20 @@ Future<void> openWeb({required String url}) async {
   );
 }
 
+Widget labelText(
+    BuildContext context,
+    String label,
+    ) {
+  final theme = Theme.of(context);
+  return Text(
+    label,
+    style: theme.textTheme.bodySmall!.copyWith(
+      color: theme.colorScheme.tertiaryFixed,
+      fontWeight: FontWeight.normal,
+    ),
+  );
+}
+
 /// Customizable toast
 void showMessage({
   required String message,

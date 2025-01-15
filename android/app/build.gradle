@@ -1,11 +1,7 @@
 plugins {
     id "com.android.application"
-    // START: FlutterFire Configuration
     id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
-    // END: FlutterFire Configuration
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -36,8 +32,15 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    dependencies {
+        implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    }
 }
 
 flutter {
     source = "../.."
 }
+
+
+

@@ -1,4 +1,5 @@
 import 'package:everlook_mobile/features/settings/presentation/widgets/license_verification.dart';
+import 'package:everlook_mobile/navigation/app_router.dart';
 import 'package:everlook_mobile/source/imports.dart';
 import 'package:everlook_mobile/common/mixin/theme_wm_mixin.dart';
 import 'package:everlook_mobile/ui_kit/map_screen.dart';
@@ -259,7 +260,9 @@ final class SettingsWM extends WidgetModel<SettingsScreen, SettingsModel> with T
   }
 
   @override
-  void changePassword() {
-    model.changePassword();
+  void changePassword() async {
+    if (user.value.data?.email != null) {
+      context.pushRoute(const RecoveryPasswordRoute());
+    }
   }
 }

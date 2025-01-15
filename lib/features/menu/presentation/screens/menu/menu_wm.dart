@@ -127,9 +127,7 @@ final class MenuWM extends WidgetModel<MenuScreen, MenuModel> with ThemeWMMixin 
   @override
   void pressSignOut() async {
     await model.logout().then((_) {
-      context.pushRoute(AuthRoute(
-        onResult: (value) {},
-      ));
+      context.pushRoute(AuthRoute());
     });
   }
 
